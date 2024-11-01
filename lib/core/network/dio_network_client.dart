@@ -1,3 +1,4 @@
+import 'package:current_weather/core/exceptions/base_exception.dart';
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/core/network/network_client.dart';
@@ -30,7 +31,9 @@ class DioNetworkClient implements NetworkClient {
       );
       return _handleResponse(response);
     } on DioException catch (error) {
-      return _handleDioExceptions(error);
+      throw _handleDioExceptions(error);
+    } on ServerException {
+      rethrow;
     } catch (error) {
       throw const NetworkException();
     }
@@ -41,7 +44,7 @@ class DioNetworkClient implements NetworkClient {
         responseType: ResponseType.json,
         sendTimeout: const Duration(seconds: _networkTimeoutDurationSeconds),
         receiveTimeout: const Duration(seconds: _networkTimeoutDurationSeconds),
-        headers: request.headers,
+        headers: request.headers ?? {},
       );
 
   NetworkResponse _handleResponse(Response<dynamic> response) {
@@ -62,7 +65,7 @@ class DioNetworkClient implements NetworkClient {
     return statusCode == null || statusCode < 200 || statusCode >= 300;
   }
 
-  NetworkResponse _handleDioExceptions(DioException error) {
+  BaseException _handleDioExceptions(DioException error) {
     if (error.response != null) {
       throw ServerException(
         statusCode: error.response?.statusCode,
