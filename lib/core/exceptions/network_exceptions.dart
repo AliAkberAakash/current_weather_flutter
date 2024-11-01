@@ -4,6 +4,6 @@ class NetworkException extends BaseException {
   const NetworkException();
 }
 
-class NetworkTimeOutException extends NetworkException {
-  const NetworkTimeOutException();
+class NetworkTimeoutException extends NetworkException {
+  const NetworkTimeoutException();
 }
