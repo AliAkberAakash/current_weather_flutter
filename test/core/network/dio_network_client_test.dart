@@ -19,9 +19,10 @@ void main() {
     });
 
     group('DioNetworkClient.get', () {
+      const testRequest =
+          NetworkRequest(url: 'https://example.com', queryParams: {});
+
       test('should return NetworkResponse on successful response', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -54,14 +55,12 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
       test('should handle null response data correctly', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -94,14 +93,12 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
       test('throws NetworkTimeoutException on connection timeout', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -122,14 +119,12 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
       test('throws NetworkTimeoutException on connection timeout', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -150,14 +145,12 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
       test('throws NetworkException on DioException except timeout', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -178,15 +171,13 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
       test('throws ServerException when DioException contains response',
           () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
         when(
           () => mockDio.get(
             'https://example.com',
@@ -210,7 +201,8 @@ void main() {
           throwsA(
             isA<ServerException>()
                 .having((e) => e.statusCode, 'statusCode', 500)
-                .having((e) => e.statusMessage, 'statusMessage', 'Internal Server Error'),
+                .having((e) => e.statusMessage, 'statusMessage',
+                    'Internal Server Error'),
           ),
         );
 
@@ -218,14 +210,12 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
 
-       test('throws ServerException on non-2xx status code', () async {
-        const testRequest =
-            NetworkRequest(url: 'https://example.com', queryParams: {});
+      test('throws ServerException on non-2xx status code', () async {
         when(
           () => mockDio.get(
             'https://example.com',
@@ -257,7 +247,7 @@ void main() {
           () => mockDio.get(
             testRequest.url,
             options: any(named: 'options'),
-            queryParameters: any(named: 'queryParameters'),
+            queryParameters: {},
           ),
         ).called(1);
       });
