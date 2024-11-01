@@ -7,8 +7,6 @@ import 'package:current_weather/core/network/network_response.dart';
 import 'package:dio/dio.dart';
 
 class DioNetworkClient implements NetworkClient {
-  static const int _networkTimeoutDurationSeconds = 10;
-
   final Dio _dio;
   final List<Interceptor> interceptors;
 
@@ -40,10 +38,6 @@ class DioNetworkClient implements NetworkClient {
   }
 
   Options _createDioOptions(NetworkRequest request) => Options(
-        contentType: request.headers?['Content-Type'] ?? 'application/json',
-        responseType: ResponseType.json,
-        sendTimeout: const Duration(seconds: _networkTimeoutDurationSeconds),
-        receiveTimeout: const Duration(seconds: _networkTimeoutDurationSeconds),
         headers: request.headers ?? {},
       );
 
