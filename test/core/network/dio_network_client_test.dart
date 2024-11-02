@@ -8,14 +8,41 @@ import "package:mocktail/mocktail.dart";
 
 class _MockDio extends Mock implements Dio {}
 
-void main() {
-  group("DioNetworkClient", () {
-    late _MockDio mockDio;
-    late DioNetworkClient networkClient;
+class MockInterceptor extends Mock implements Interceptor {}
 
+class MockInterceptors extends Mock implements Interceptors {}
+
+void main() {
+  late _MockDio mockDio;
+  late DioNetworkClient networkClient;
+  late MockInterceptors mockInterceptors;
+
+  group("DioNetworkClient", () {
     setUp(() {
       mockDio = _MockDio();
       networkClient = DioNetworkClient(mockDio);
+      mockInterceptors = MockInterceptors();
+      when(() => mockDio.interceptors).thenReturn(mockInterceptors);
+    });
+
+    group('Constructor', () {
+      test('adds interceptors to Dio if interceptors list is not empty', () {
+        final interceptor1 = MockInterceptor();
+        final interceptor2 = MockInterceptor();
+        final interceptors = [interceptor1, interceptor2];
+
+        when(() => mockInterceptors.addAll(interceptors)).thenReturn(null);
+
+        DioNetworkClient(mockDio, interceptors: interceptors);
+
+        verify(() => mockDio.interceptors.addAll(interceptors)).called(1);
+      });
+
+      test('does not add any interceptors if interceptors list is empty', () {
+        DioNetworkClient(mockDio);
+
+        verifyNever(() => mockInterceptors.addAll(any()));
+      });
     });
 
     group("DioNetworkClient.get", () {
@@ -60,7 +87,8 @@ void main() {
         ).called(1);
       });
 
-      test("should throw NetworkException when network response is null", () async {
+      test("should throw NetworkException when network response is null",
+          () async {
         when(
           () => mockDio.get(
             "https://example.com",
@@ -80,7 +108,8 @@ void main() {
           ),
         );
 
-        expect(networkClient.get(testRequest), throwsA(isA<NetworkException>()));
+        expect(
+            networkClient.get(testRequest), throwsA(isA<NetworkException>()));
         verify(
           () => mockDio.get(
             testRequest.url,
