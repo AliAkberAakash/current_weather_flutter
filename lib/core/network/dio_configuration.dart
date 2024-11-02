@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 
 const int _networkTimeoutDurationSeconds = 10;
-const String _stagingUrl = "https://stagingUrl.com";
-const String _prodUrl = "https://prodUrl.com";
+const String _stagingUrl = "https://api.openweathermap.org/data/2.5/";
+const String _prodUrl = "https://api.openweathermap.org/data/2.5/";
 const String _contentTypeJson = 'application/json';
 
 /// Here we could change the baseUrl based on the
