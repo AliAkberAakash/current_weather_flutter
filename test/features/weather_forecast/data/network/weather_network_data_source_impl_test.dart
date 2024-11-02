@@ -54,6 +54,7 @@ void main() {
         const WeatherQueryRequest actualRequest = WeatherQueryRequest(
           50.221291,
           9.968617,
+          "metric",
         );
         var expectedResult = const [
           WeeklyWeatherResponse(
@@ -103,6 +104,7 @@ void main() {
         const WeatherQueryRequest actualRequest = WeatherQueryRequest(
           50.221291,
           9.968617,
+          "metric",
         );
 
         expect(
@@ -133,6 +135,7 @@ void main() {
         const WeatherQueryRequest actualRequest = WeatherQueryRequest(
           50.221291,
           9.968617,
+          "metric",
         );
 
         expect(
@@ -163,6 +166,7 @@ void main() {
         const WeatherQueryRequest actualRequest = WeatherQueryRequest(
           50.221291,
           9.968617,
+          "metric",
         );
 
         expect(
@@ -193,6 +197,7 @@ void main() {
         const WeatherQueryRequest actualRequest = WeatherQueryRequest(
           50.221291,
           9.968617,
+          "metric",
         );
 
         expect(

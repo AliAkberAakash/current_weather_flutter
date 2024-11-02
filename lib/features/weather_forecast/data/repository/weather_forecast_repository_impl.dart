@@ -20,9 +20,10 @@ class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
   Future<List<WeatherDetailsEntity>> getWeatherDetails(
     double lat,
     double lon,
+    String unit,
   ) async {
     try {
-      final request = WeatherQueryRequest(lat, lon);
+      final request = WeatherQueryRequest(lat, lon, unit);
       final response =
           await _weatherNetworkDataSource.getWeatherResponse(request);
 

@@ -36,7 +36,7 @@ void main() {
       );
     });
 
-    const mockRequest = WeatherQueryRequest(-10, -20);
+    const mockRequest = WeatherQueryRequest(-10, -20, "metric");
     const weatherDetailsResponse = WeeklyWeatherResponse(
       dateTime: 1234567890,
       weatherDetails: WeatherDetails(
@@ -86,6 +86,7 @@ void main() {
       final result = await repository.getWeatherDetails(
         -10,
         -20,
+        "metric",
       );
 
       expect(result, expectedResult);
@@ -110,6 +111,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
+          "metric",
         ),
         throwsA(isA<NetworkException>()),
       );
@@ -134,6 +136,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
+          "metric",
         ),
         throwsA(isA<NetworkTimeoutException>()),
       );
@@ -144,7 +147,7 @@ void main() {
         () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
       );
       verify(
-            () => mockLogger.d("NetworkTimeoutException()"),
+        () => mockLogger.d("NetworkTimeoutException()"),
       ).called(1);
     });
 
@@ -158,6 +161,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
+          "metric",
         ),
         throwsA(isA<ServerException>()),
       );
@@ -168,7 +172,7 @@ void main() {
         () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
       );
       verify(
-            () => mockLogger.d("ServerException(null, null)"),
+        () => mockLogger.d("ServerException(null, null)"),
       ).called(1);
     });
 
@@ -182,6 +186,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
+          "metric",
         ),
         throwsA(isA<FormatException>()),
       );
@@ -192,7 +197,7 @@ void main() {
         () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
       );
       verify(
-            () => mockLogger.d("FormatException"),
+        () => mockLogger.d("FormatException"),
       ).called(1);
     });
   });
