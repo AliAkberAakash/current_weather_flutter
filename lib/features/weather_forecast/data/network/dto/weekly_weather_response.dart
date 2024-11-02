@@ -38,17 +38,17 @@ class WeeklyWeatherResponse extends Equatable {
 }
 
 @JsonSerializable()
-class WeatherDetails {
-  @JsonKey(name: 'tempMin')
+class WeatherDetails extends Equatable {
+  @JsonKey(name: 'temp_min')
   final double tempMin;
-  @JsonKey(name: 'tempMax')
+  @JsonKey(name: 'temp_max')
   final double tempMax;
   @JsonKey(name: 'pressure')
   final int pressure;
   @JsonKey(name: 'humidity')
   final int humidity;
 
-  WeatherDetails({
+  const WeatherDetails({
     required this.tempMin,
     required this.tempMax,
     required this.pressure,
@@ -57,6 +57,15 @@ class WeatherDetails {
 
   factory WeatherDetails.fromJson(Map<String, dynamic> json) =>
       _$WeatherDetailsFromJson(json);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        tempMin,
+        tempMax,
+        pressure,
+        humidity,
+      ];
 }
 
 @JsonSerializable()

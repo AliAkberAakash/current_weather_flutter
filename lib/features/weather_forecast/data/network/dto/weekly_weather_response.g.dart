@@ -31,16 +31,16 @@ Map<String, dynamic> _$WeeklyWeatherResponseToJson(
 
 WeatherDetails _$WeatherDetailsFromJson(Map<String, dynamic> json) =>
     WeatherDetails(
-      tempMin: (json['tempMin'] as num).toDouble(),
-      tempMax: (json['tempMax'] as num).toDouble(),
+      tempMin: (json['temp_min'] as num).toDouble(),
+      tempMax: (json['temp_max'] as num).toDouble(),
       pressure: (json['pressure'] as num).toInt(),
       humidity: (json['humidity'] as num).toInt(),
     );
 
 Map<String, dynamic> _$WeatherDetailsToJson(WeatherDetails instance) =>
     <String, dynamic>{
-      'tempMin': instance.tempMin,
-      'tempMax': instance.tempMax,
+      'temp_min': instance.tempMin,
+      'temp_max': instance.tempMax,
       'pressure': instance.pressure,
       'humidity': instance.humidity,
     };
