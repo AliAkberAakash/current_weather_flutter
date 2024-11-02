@@ -86,7 +86,7 @@ void main() {
       });
 
       test(
-          "getWeatherResponse throws NetworkException when NetworkClient throws exception",
+          "getWeatherResponse throws NetworkException when NetworkClient throws NetworkException",
           () async {
         const mockNetworkRequest = NetworkRequest(
           url: "forecast",
@@ -116,37 +116,7 @@ void main() {
       });
 
       test(
-          "getWeatherResponse throws ServerException when NetworkClient throws exception",
-          () async {
-        const mockNetworkRequest = NetworkRequest(
-          url: "forecast",
-          queryParams: {
-            "lat": "50.221291",
-            "lon": "9.968617",
-            "appId": "112b57f4be025fddcb03a568ee3b40a6",
-          },
-        );
-
-        when(() => networkClient.get(mockNetworkRequest))
-            .thenThrow(const ServerException());
-
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-        );
-
-        expect(
-          weatherNetworkDataSource.getWeatherResponse(actualRequest),
-          throwsA(isA<ServerException>()),
-        );
-
-        verify(
-          () => networkClient.get(mockNetworkRequest),
-        ).called(1);
-      });
-
-      test(
-          "getWeatherResponse throws NetworkTimeoutException when NetworkClient throws exception",
+          "getWeatherResponse throws NetworkTimeoutException when NetworkClient throws NetworkTimeoutException",
           () async {
         const mockNetworkRequest = NetworkRequest(
           url: "forecast",
@@ -176,7 +146,37 @@ void main() {
       });
 
       test(
-          "getWeatherResponse throws any other when NetworkClient throws exception",
+          "getWeatherResponse throws ServerException when NetworkClient throws ServerException",
+          () async {
+        const mockNetworkRequest = NetworkRequest(
+          url: "forecast",
+          queryParams: {
+            "lat": "50.221291",
+            "lon": "9.968617",
+            "appId": "112b57f4be025fddcb03a568ee3b40a6",
+          },
+        );
+
+        when(() => networkClient.get(mockNetworkRequest))
+            .thenThrow(const ServerException());
+
+        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
+          50.221291,
+          9.968617,
+        );
+
+        expect(
+          weatherNetworkDataSource.getWeatherResponse(actualRequest),
+          throwsA(isA<ServerException>()),
+        );
+
+        verify(
+          () => networkClient.get(mockNetworkRequest),
+        ).called(1);
+      });
+
+      test(
+          "getWeatherResponse rethrows any other exception when NetworkClient throws exception",
           () async {
         const mockNetworkRequest = NetworkRequest(
           url: "forecast",

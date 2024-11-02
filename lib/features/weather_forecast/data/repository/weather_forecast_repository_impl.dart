@@ -6,30 +6,32 @@ import 'package:current_weather/features/weather_forecast/domain/repository/weat
 import 'package:logger/logger.dart';
 
 class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
-  final WeatherNetworkDataSource weatherNetworkDataSource;
-  final WeatherDetailsEntityMapper mapper;
-  final Logger logger;
+  final WeatherNetworkDataSource _weatherNetworkDataSource;
+  final WeatherDetailsEntityMapper _mapper;
+  final Logger _logger;
 
   WeatherForecastRepositoryImpl(
-    this.weatherNetworkDataSource,
-    this.mapper,
-    this.logger,
+    this._weatherNetworkDataSource,
+    this._mapper,
+    this._logger,
   );
 
   @override
   Future<List<WeatherDetailsEntity>> getWeatherDetails(
-      double lat, double lon) async {
+    double lat,
+    double lon,
+  ) async {
     try {
       final request = WeatherQueryRequest(lat, lon);
       final response =
-          await weatherNetworkDataSource.getWeatherResponse(request);
+          await _weatherNetworkDataSource.getWeatherResponse(request);
 
       return response
           .map((weatherDetails) =>
-              mapper.mapFromWeeklyWeatherResponse(weatherDetails))
+              _mapper.mapFromWeeklyWeatherResponse(weatherDetails))
           .toList();
     } catch (e) {
-      logger.d(e.toString());
+      _logger.d(e.toString());
       rethrow;
     }
   }
