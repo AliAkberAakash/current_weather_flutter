@@ -6,7 +6,9 @@ void main() {
   group('WeatherDetailsEntityMapperImpl', () {
     final mapper = WeatherDetailsEntityMapperImpl();
 
-    test('mapFromWeeklyWeatherResponse should map WeeklyWeatherResponse to WeatherDetailsEntity', () {
+    test(
+        'mapFromWeeklyWeatherResponse should map WeeklyWeatherResponse to WeatherDetailsEntity',
+        () {
       const weeklyWeatherResponse = WeeklyWeatherResponse(
         dateTime: 1234567890,
         weatherDetails: WeatherDetails(
@@ -36,20 +38,6 @@ void main() {
       expect(result.weather.first.name, equals("Clear"));
       expect(result.weather.first.description, equals("clear sky"));
       expect(result.weather.first.icon, equals("01d"));
-    });
-
-    test('mapFromWeather should map Weather to WeatherEntity', () {
-      const weatherResponse = Weather(
-        name: "Rain",
-        description: "light rain",
-        icon: "10d",
-      );
-
-      final result = mapper.mapFromWeather(weatherResponse);
-
-      expect(result.name, equals("Rain"));
-      expect(result.description, equals("light rain"));
-      expect(result.icon, equals("10d"));
     });
   });
 }

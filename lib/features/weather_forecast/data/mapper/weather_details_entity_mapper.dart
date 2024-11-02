@@ -2,8 +2,6 @@ import 'package:current_weather/features/weather_forecast/data/network/dto/weekl
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
 
 abstract class WeatherDetailsEntityMapper {
-  WeatherEntity mapFromWeather(Weather response);
-
   WeatherDetailsEntity mapFromWeeklyWeatherResponse(
       WeeklyWeatherResponse response);
 }
@@ -19,14 +17,14 @@ class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
       pressure: response.weatherDetails.pressure,
       humidity: response.weatherDetails.humidity,
       partOfDay: response.sys.partOfDay,
-      weather:
-          response.weather.map((response) => mapFromWeather(response)).toList(),
+      weather: response.weather
+          .map((response) => _mapFromWeather(response))
+          .toList(),
       speed: response.wind.speed,
     );
   }
 
-  @override
-  WeatherEntity mapFromWeather(Weather response) {
+  WeatherEntity _mapFromWeather(Weather response) {
     return WeatherEntity(
       name: response.name,
       description: response.description,
