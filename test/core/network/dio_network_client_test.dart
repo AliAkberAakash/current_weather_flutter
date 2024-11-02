@@ -60,7 +60,7 @@ void main() {
         ).called(1);
       });
 
-      test("should handle null response data correctly", () async {
+      test("should throw NetworkException when network response is null", () async {
         when(
           () => mockDio.get(
             "https://example.com",
@@ -80,15 +80,7 @@ void main() {
           ),
         );
 
-        final result = await networkClient.get(testRequest);
-
-        expect(result.body, null);
-        expect(
-          result.headers,
-          {
-            "content-type": ["application/json"]
-          },
-        );
+        expect(networkClient.get(testRequest), throwsA(isA<NetworkException>()));
         verify(
           () => mockDio.get(
             testRequest.url,

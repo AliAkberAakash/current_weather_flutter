@@ -59,7 +59,6 @@ class WeatherDetails extends Equatable {
       _$WeatherDetailsFromJson(json);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         tempMin,
         tempMax,
