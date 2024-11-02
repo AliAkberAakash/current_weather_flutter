@@ -11,7 +11,7 @@ import 'package:current_weather/features/weather_forecast/data/network/weather_n
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/common_mocks.dart';
+import '../../../../utils/common_mocks.dart';
 import 'json_response.dart';
 
 class _MockNetworkClient extends Mock implements NetworkClient {}
