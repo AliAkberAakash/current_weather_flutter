@@ -17,20 +17,20 @@ import 'json_response.dart';
 class _MockNetworkClient extends Mock implements NetworkClient {}
 
 void main() {
+  late _MockNetworkClient networkClient;
+  late MockLogger logger;
+  late WeatherNetworkDataSourceImpl weatherNetworkDataSource;
+
+  setUp(() {
+    networkClient = _MockNetworkClient();
+    logger = MockLogger();
+    weatherNetworkDataSource = WeatherNetworkDataSourceImpl(
+      networkClient,
+      logger,
+    );
+  });
+
   group("WeatherNetworkDataSourceImpl", () {
-    late _MockNetworkClient networkClient;
-    late MockLogger logger;
-    late WeatherNetworkDataSourceImpl weatherNetworkDataSource;
-
-    setUp(() {
-      networkClient = _MockNetworkClient();
-      logger = MockLogger();
-      weatherNetworkDataSource = WeatherNetworkDataSourceImpl(
-        networkClient,
-        logger,
-      );
-    });
-
     group("getWeatherResponse", () {
       test(
           "getWeatherResponse returns WeeklyWeatherResponse when success request",

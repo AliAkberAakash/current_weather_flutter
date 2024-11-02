@@ -24,18 +24,18 @@ void main() {
   late _MockWeatherDetailsEntityMapper mockMapper;
   late Logger mockLogger;
 
-  group("WeatherForecastRepositoryImpl", () {
-    setUp(() {
-      mockNetworkDataSource = _MockWeatherNetworkDataSource();
-      mockMapper = _MockWeatherDetailsEntityMapper();
-      mockLogger = MockLogger();
-      repository = WeatherForecastRepositoryImpl(
-        mockNetworkDataSource,
-        mockMapper,
-        mockLogger,
-      );
-    });
+  setUp(() {
+    mockNetworkDataSource = _MockWeatherNetworkDataSource();
+    mockMapper = _MockWeatherDetailsEntityMapper();
+    mockLogger = MockLogger();
+    repository = WeatherForecastRepositoryImpl(
+      mockNetworkDataSource,
+      mockMapper,
+      mockLogger,
+    );
+  });
 
+  group("WeatherForecastRepositoryImpl", () {
     const mockRequest = WeatherQueryRequest(-10, -20, "metric");
     const weatherDetailsResponse = WeeklyWeatherResponse(
       dateTime: 1234567890,
