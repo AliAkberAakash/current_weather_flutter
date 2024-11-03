@@ -1,3 +1,4 @@
+import 'package:current_weather/core/exceptions/base_exception.dart';
 import 'package:current_weather/features/weather_forecast/presentation/model/weather_details_ui_model.dart';
 import 'package:equatable/equatable.dart';
 
@@ -18,8 +19,10 @@ class WeatherListLoadedState extends WeatherListState {
 }
 
 class WeatherListErrorState extends WeatherListState {
-  WeatherListErrorState();
+  final BaseException? exception;
+
+  WeatherListErrorState({this.exception});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [exception];
 }

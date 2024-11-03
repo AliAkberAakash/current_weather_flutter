@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:current_weather/core/exceptions/base_exception.dart';
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_event.dart';
@@ -32,8 +33,11 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
 
       emit(WeatherListLoadedState(weatherDetailsUiModelList));
     } catch (e) {
-      emit(WeatherListErrorState());
-      // todo: show localized message
+      if (e is BaseException) {
+        emit(WeatherListErrorState(exception: e));
+      } else {
+        emit(WeatherListErrorState());
+      }
     }
   }
 }
