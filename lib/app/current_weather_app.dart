@@ -1,3 +1,4 @@
+import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_screen.dart';
 import 'package:flutter/material.dart';
 
 class CurrentWeatherApp extends StatelessWidget {
@@ -5,6 +6,6 @@ class CurrentWeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const WeatherForecastScreen();
   }
 }

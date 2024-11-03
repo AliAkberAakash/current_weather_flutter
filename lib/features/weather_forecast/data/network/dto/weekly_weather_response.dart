@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'weekly_weather_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class WeeklyWeatherResponse extends Equatable {
   @JsonKey(name: 'dt')
   final int dateTime;
@@ -37,7 +37,7 @@ class WeeklyWeatherResponse extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class WeatherDetails extends Equatable {
   @JsonKey(name: 'temp_min')
   final double tempMin;
@@ -67,7 +67,7 @@ class WeatherDetails extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Sys extends Equatable {
   @JsonKey(name: 'pod')
   final String partOfDay;
@@ -82,7 +82,7 @@ class Sys extends Equatable {
   factory Sys.fromJson(Map<String, dynamic> json) => _$SysFromJson(json);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Weather extends Equatable {
   @JsonKey(name: 'main')
   final String name;
@@ -108,7 +108,7 @@ class Weather extends Equatable {
       _$WeatherFromJson(json);
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Wind extends Equatable {
   @JsonKey(name: "speed")
   final double speed;
