@@ -7,6 +7,7 @@ import 'package:current_weather/features/weather_forecast/presentation/weather_f
 import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class WeatherForecastScreen extends StatefulWidget {
   const WeatherForecastScreen({super.key});
@@ -18,6 +19,8 @@ class WeatherForecastScreen extends StatefulWidget {
 class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   final WeatherListBloc weatherListBloc = getIt.get();
   final WeatherDetailsCubit weatherDetailsCubit = getIt.get();
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -52,22 +55,26 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
           bloc: weatherListBloc,
           builder: (ctx, state) {
             if (state is WeatherListLoadedState) {
-              return OrientationBuilder(
-                builder: (ctx, orientation) {
-                  if (orientation == Orientation.portrait) {
-                    return WeatherForecastPortraitScreen(
-                      weatherDetailsUiModelList:
-                          state.weatherDetailsUiModelList,
-                      weatherDetailsCubit: weatherDetailsCubit,
-                    );
-                  } else {
-                    return WeatherForecastLandscapeScreen(
-                      weatherDetailsUiModelList:
-                          state.weatherDetailsUiModelList,
-                      weatherDetailsCubit: weatherDetailsCubit,
-                    );
-                  }
-                },
+              return SmartRefresher(
+                controller: _refreshController,
+                onRefresh: _onRefresh,
+                child: OrientationBuilder(
+                  builder: (ctx, orientation) {
+                    if (orientation == Orientation.portrait) {
+                      return WeatherForecastPortraitScreen(
+                        weatherDetailsUiModelList:
+                            state.weatherDetailsUiModelList,
+                        weatherDetailsCubit: weatherDetailsCubit,
+                      );
+                    } else {
+                      return WeatherForecastLandscapeScreen(
+                        weatherDetailsUiModelList:
+                            state.weatherDetailsUiModelList,
+                        weatherDetailsCubit: weatherDetailsCubit,
+                      );
+                    }
+                  },
+                ),
               );
             } else if (state is WeatherListLoadingState) {
               return const Center(
@@ -80,5 +87,9 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
         ),
       ),
     );
+  }
+
+  void _onRefresh() {
+    weatherListBloc.add(WeatherListLoadEvent());
   }
 }
