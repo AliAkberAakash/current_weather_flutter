@@ -12,7 +12,7 @@ class CurrentWeatherApp extends StatelessWidget {
       theme: theme.light(),
       darkTheme: theme.dark(),
       debugShowCheckedModeBanner: false,
-      home: const WeatherForecastScreen(),
+      home: WeatherForecastScreen(),
     );
   }
 }

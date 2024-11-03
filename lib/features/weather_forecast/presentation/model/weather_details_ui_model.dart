@@ -1,4 +1,5 @@
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
+import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
 const _fullNameFormat = "EEEE";
@@ -7,7 +8,7 @@ const _humidityUnit = "%";
 const _pressureUnit = "hPa";
 const _windSpeedUnit = "km/h";
 
-class WeatherDetailsUiModel {
+class WeatherDetailsUiModel extends Equatable {
   final String dayNameFull;
   final String dayNameShort;
   final String tempMin;
@@ -20,7 +21,7 @@ class WeatherDetailsUiModel {
   final String icon;
   final String windSpeed;
 
-  WeatherDetailsUiModel({
+  const WeatherDetailsUiModel({
     required this.dayNameFull,
     required this.dayNameShort,
     required this.tempMin,
@@ -69,4 +70,19 @@ class WeatherDetailsUiModel {
   static String _getWeatherImageUrl(String imageIcon) {
     return "https://openweathermap.org/img/wn/$imageIcon@2x.png";
   }
+
+  @override
+  List<Object?> get props => [
+        dayNameFull,
+        dayNameShort,
+        tempMin,
+        tempMax,
+        pressure,
+        humidity,
+        partOfDay,
+        weatherCondition,
+        description,
+        icon,
+        windSpeed,
+      ];
 }

@@ -1,8 +1,14 @@
+import 'package:current_weather/features/weather_forecast/presentation/model/weather_details_ui_model.dart';
 import 'package:current_weather_design_system/styles/util/extensions.dart';
 import 'package:flutter/material.dart';
 
 class WeatherDayInfoWidget extends StatelessWidget {
-  const WeatherDayInfoWidget({super.key});
+  final WeatherDetailsUiModel uiModel;
+
+  const WeatherDayInfoWidget({
+    super.key,
+    required this.uiModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +24,14 @@ class WeatherDayInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "Fri",
+                uiModel.dayNameShort,
                 style: theme.textTheme.titleMedium,
               ),
               Image.network(
-                "https://openweathermap.org/img/wn/10d@2x.png",
+                uiModel.icon,
               ),
               Text(
-                "14°/21°",
+                "${uiModel.tempMax}°/${uiModel.tempMax}°",
                 style: theme.textTheme.titleMedium,
               ),
             ],
