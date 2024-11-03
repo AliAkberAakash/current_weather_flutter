@@ -8,6 +8,7 @@ import 'package:current_weather/features/weather_forecast/data/repository/weathe
 import 'package:current_weather/features/weather_forecast/domain/repository/weather_forecast_repository.dart';
 import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case.dart';
 import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case_impl.dart';
+import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_details_cubit.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -65,9 +66,13 @@ void setup() {
     ),
   );
 
-  getIt.registerFactory(
+  getIt.registerFactory<WeatherListBloc>(
     () => WeatherListBloc(
       getIt.get(),
     ),
+  );
+
+  getIt.registerFactory<WeatherDetailsCubit>(
+    () => WeatherDetailsCubit(),
   );
 }

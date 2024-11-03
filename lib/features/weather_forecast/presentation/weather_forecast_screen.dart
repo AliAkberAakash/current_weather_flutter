@@ -1,4 +1,5 @@
 import 'package:current_weather/di/di.dart';
+import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_details_cubit.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_state.dart';
@@ -6,28 +7,53 @@ import 'package:current_weather/features/weather_forecast/presentation/weather_f
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WeatherForecastScreen extends StatelessWidget {
+class WeatherForecastScreen extends StatefulWidget {
   const WeatherForecastScreen({super.key});
+
+  @override
+  State<WeatherForecastScreen> createState() => _WeatherForecastScreenState();
+}
+
+class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
+  final WeatherListBloc weatherListBloc = getIt.get();
+  final WeatherDetailsCubit weatherDetailsCubit = getIt.get();
+
+  @override
+  void initState() {
+    weatherListBloc.add(WeatherListLoadEvent());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    weatherListBloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "Friday",
-        ),
-      ),
-      body: BlocProvider(
-        create: (context) => getIt.get<WeatherListBloc>()
-          ..add(
-            WeatherListLoadEvent(),
-          ),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<WeatherListBloc, WeatherListState>(
+            bloc: weatherListBloc,
+            listener: (context, state) {
+              if (state is WeatherListLoadedState &&
+                  state.weatherDetailsUiModelList.isNotEmpty) {
+                weatherDetailsCubit.updateWeatherDetails(
+                  state.weatherDetailsUiModelList.first,
+                );
+              }
+            },
+          )
+        ],
         child: BlocBuilder<WeatherListBloc, WeatherListState>(
+          bloc: weatherListBloc,
           builder: (ctx, state) {
             if (state is WeatherListLoadedState) {
               return WeatherForecastPortraitScreen(
                 weatherDetailsUiModelList: state.weatherDetailsUiModelList,
+                weatherDetailsCubit: weatherDetailsCubit,
               );
             } else if (state is WeatherListLoadingState) {
               return const Center(

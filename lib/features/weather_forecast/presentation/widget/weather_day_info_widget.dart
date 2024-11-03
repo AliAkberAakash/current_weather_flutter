@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class WeatherDayInfoWidget extends StatelessWidget {
   final WeatherDetailsUiModel uiModel;
+  final void Function(WeatherDetailsUiModel) onTap;
 
   const WeatherDayInfoWidget({
     super.key,
     required this.uiModel,
+    required this.onTap,
   });
 
   @override
@@ -15,26 +17,30 @@ class WeatherDayInfoWidget extends StatelessWidget {
     final theme = context.theme;
 
     return Card(
+      clipBehavior: Clip.antiAlias,
       color: theme.colorScheme.surfaceBright,
-      child: Padding(
-        padding: EdgeInsets.all(theme.spacingTokens.cwSpacing8),
-        child: SizedBox(
-          width: 180,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                uiModel.dayNameShort,
-                style: theme.textTheme.titleMedium,
-              ),
-              Image.network(
-                uiModel.icon,
-              ),
-              Text(
-                "${uiModel.tempMax}°/${uiModel.tempMax}°",
-                style: theme.textTheme.titleMedium,
-              ),
-            ],
+      child: InkWell(
+        onTap: () => onTap(uiModel),
+        child: Padding(
+          padding: EdgeInsets.all(theme.spacingTokens.cwSpacing8),
+          child: SizedBox(
+            width: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  uiModel.dayNameShort,
+                  style: theme.textTheme.titleMedium,
+                ),
+                Image.network(
+                  uiModel.icon,
+                ),
+                Text(
+                  "${uiModel.tempMax}°/${uiModel.tempMax}°",
+                  style: theme.textTheme.titleMedium,
+                ),
+              ],
+            ),
           ),
         ),
       ),

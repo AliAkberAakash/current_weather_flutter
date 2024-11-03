@@ -24,6 +24,7 @@ class WeatherNetworkDataSourceImpl implements WeatherNetworkDataSource {
           "lat": request.lat.toString(),
           "lon": request.lon.toString(),
           "appId": "112b57f4be025fddcb03a568ee3b40a6",
+          "units": request.unit,
         },
       );
       final response = await _networkClient.get(networkRequest);
