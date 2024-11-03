@@ -14,7 +14,25 @@ class WeatherForecastUseCaseImpl implements WeatherForecastUseCase {
     double lat,
     double lon,
     String unit,
-  ) {
-    return repository.getWeatherDetails(lat, lon, unit);
+  ) async {
+    final response = await repository.getWeatherDetails(lat, lon, unit);
+    return _filterFirstWeatherDetailsPerDay(response);
+  }
+
+  List<WeatherDetailsEntity> _filterFirstWeatherDetailsPerDay(
+      List<WeatherDetailsEntity> weatherDetails) {
+    Map<String, WeatherDetailsEntity> firstWeatherDetailsPerDay = {};
+
+    for (var entity in weatherDetails) {
+      DateTime date =
+          DateTime.fromMillisecondsSinceEpoch(entity.dateTime * 1000);
+      String dayKey = "${date.year}-${date.month}-${date.day}";
+
+      if (!firstWeatherDetailsPerDay.containsKey(dayKey)) {
+        firstWeatherDetailsPerDay[dayKey] = entity;
+      }
+    }
+
+    return firstWeatherDetailsPerDay.values.toList();
   }
 }
