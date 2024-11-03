@@ -1,4 +1,5 @@
 import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_screen.dart';
+import 'package:current_weather_design_system/styles/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CurrentWeatherApp extends StatelessWidget {
@@ -6,6 +7,12 @@ class CurrentWeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const WeatherForecastScreen();
+    return MaterialApp(
+      title: 'Leafy',
+      theme: theme.light(),
+      darkTheme: theme.dark(),
+      debugShowCheckedModeBanner: false,
+      home: const WeatherForecastScreen(),
+    );
   }
 }
