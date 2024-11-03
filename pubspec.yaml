@@ -41,6 +41,10 @@ dependencies:
   mocktail: ^1.0.4
   pretty_dio_logger: ^1.4.0
 
+  #local packages
+  current_weather_design_system:
+    path: ./current_weather_design_system
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
