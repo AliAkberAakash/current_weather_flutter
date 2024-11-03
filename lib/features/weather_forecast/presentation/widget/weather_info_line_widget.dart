@@ -19,7 +19,7 @@ class WeatherInfoLineWidget extends StatelessWidget {
       children: [
         Text(
           "$property: $value",
-          style: theme.textTheme.titleSmall,
+          style: theme.textTheme.titleMedium,
         ),
       ],
     );

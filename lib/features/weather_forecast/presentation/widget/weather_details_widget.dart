@@ -56,9 +56,6 @@ class WeatherDetailsWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: theme.spacingTokens.cwSpacing32,
-        ),
       ],
     );
   }

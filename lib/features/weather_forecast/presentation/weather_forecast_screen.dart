@@ -3,6 +3,7 @@ import 'package:current_weather/features/weather_forecast/presentation/bloc/weat
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_state.dart';
+import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_landscape_screen.dart';
 import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,9 +52,22 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
           bloc: weatherListBloc,
           builder: (ctx, state) {
             if (state is WeatherListLoadedState) {
-              return WeatherForecastPortraitScreen(
-                weatherDetailsUiModelList: state.weatherDetailsUiModelList,
-                weatherDetailsCubit: weatherDetailsCubit,
+              return OrientationBuilder(
+                builder: (ctx, orientation) {
+                  if (orientation == Orientation.portrait) {
+                    return WeatherForecastPortraitScreen(
+                      weatherDetailsUiModelList:
+                          state.weatherDetailsUiModelList,
+                      weatherDetailsCubit: weatherDetailsCubit,
+                    );
+                  } else {
+                    return WeatherForecastLandscapeScreen(
+                      weatherDetailsUiModelList:
+                          state.weatherDetailsUiModelList,
+                      weatherDetailsCubit: weatherDetailsCubit,
+                    );
+                  }
+                },
               );
             } else if (state is WeatherListLoadingState) {
               return const Center(
