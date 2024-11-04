@@ -1,9 +1,9 @@
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
-import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
-import 'package:current_weather/features/weather_forecast/domain/repository/weather_forecast_repository.dart';
-import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case_impl.dart';
-import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
+import 'package:current_weather/features/current_weather/domain/repository/weather_forecast_repository.dart';
+import 'package:current_weather/features/current_weather/domain/use_case/weather_forecast_use_case_impl.dart';
+import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

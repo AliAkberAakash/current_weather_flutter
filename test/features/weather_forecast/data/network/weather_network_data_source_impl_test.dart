@@ -5,9 +5,9 @@ import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
 import 'package:current_weather/core/network/network_response.dart';
-import 'package:current_weather/features/weather_forecast/data/network/dto/weather_query_request.dart';
-import 'package:current_weather/features/weather_forecast/data/network/dto/weekly_weather_response.dart';
-import 'package:current_weather/features/weather_forecast/data/network/weather_network_data_source_impl.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/weather_query_request.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
+import 'package:current_weather/features/current_weather/data/network/weather_network_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

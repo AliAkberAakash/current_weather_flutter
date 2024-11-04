@@ -1,6 +1,6 @@
-import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
-import 'package:current_weather/features/weather_forecast/presentation/model/weather_details_ui_model.dart';
-import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
+import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
+import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 
