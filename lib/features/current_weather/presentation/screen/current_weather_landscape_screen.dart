@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class WeatherForecastLandscapeScreen extends StatefulWidget {
+class CurrentWeatherLandscapeScreen extends StatefulWidget {
   final WeatherDetailsCubit weatherDetailsCubit;
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
   final void Function() onRefresh;
   final void Function(MeasurementUnit unit) onTemperatureUnitChange;
 
-  const WeatherForecastLandscapeScreen({
+  const CurrentWeatherLandscapeScreen({
     super.key,
     required this.weatherDetailsUiModelList,
     required this.weatherDetailsCubit,
@@ -23,12 +23,12 @@ class WeatherForecastLandscapeScreen extends StatefulWidget {
   });
 
   @override
-  State<WeatherForecastLandscapeScreen> createState() =>
-      _WeatherForecastLandscapeScreenState();
+  State<CurrentWeatherLandscapeScreen> createState() =>
+      _CurrentWeatherLandscapeScreenState();
 }
 
-class _WeatherForecastLandscapeScreenState
-    extends State<WeatherForecastLandscapeScreen> {
+class _CurrentWeatherLandscapeScreenState
+    extends State<CurrentWeatherLandscapeScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 

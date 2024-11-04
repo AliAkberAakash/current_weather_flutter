@@ -5,8 +5,8 @@ import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
 import 'package:current_weather/core/network/network_response.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source_impl.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/current_weather_response.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -18,12 +18,12 @@ class _MockNetworkClient extends Mock implements NetworkClient {}
 void main() {
   late _MockNetworkClient networkClient;
   late MockLogger logger;
-  late WeatherNetworkDataSourceImpl weatherNetworkDataSource;
+  late CurrentNetworkDataSourceImpl weatherNetworkDataSource;
 
   setUp(() {
     networkClient = _MockNetworkClient();
     logger = MockLogger();
-    weatherNetworkDataSource = WeatherNetworkDataSourceImpl(
+    weatherNetworkDataSource = CurrentNetworkDataSourceImpl(
       networkClient,
       logger,
     );
@@ -51,7 +51,7 @@ void main() {
         when(() => networkClient.get(mockNetworkRequest))
             .thenAnswer((_) async => mockResponse);
         var expectedResult = const [
-          WeeklyWeatherResponse(
+          CurrentWeatherResponse(
             dateTime: 1730548800,
             weatherDetails: WeatherDetails(
               temp: 15.0,

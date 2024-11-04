@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
-import 'package:current_weather/features/current_weather/domain/use_case/weather_forecast_use_case.dart';
+import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/error_keys.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_state.dart';
@@ -11,7 +11,7 @@ import 'package:current_weather/features/current_weather/util/temperature_unit.d
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
-  final WeatherForecastUseCase useCase;
+  final CurrentWeatherUseCase useCase;
 
   WeatherListBloc(this.useCase) : super(WeatherListLoadingState()) {
     on<WeatherListLoadEvent>(_onWeatherListLoadHandler);

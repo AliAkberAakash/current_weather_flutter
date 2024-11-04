@@ -1,5 +1,5 @@
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/current_weather_response.dart';
 import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,7 +10,7 @@ void main() {
     test(
         'mapFromWeeklyWeatherResponse should map WeeklyWeatherResponse to WeatherDetailsEntity',
         () {
-      const weeklyWeatherResponse = WeeklyWeatherResponse(
+      const weeklyWeatherResponse = CurrentWeatherResponse(
         dateTime: 1234567890,
         weatherDetails: WeatherDetails(
           temp: 15.0,

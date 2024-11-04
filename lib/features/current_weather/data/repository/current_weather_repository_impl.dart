@@ -1,16 +1,16 @@
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
-import 'package:current_weather/features/current_weather/domain/repository/weather_forecast_repository.dart';
+import 'package:current_weather/features/current_weather/domain/repository/current_weather_repository.dart';
 import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:logger/logger.dart';
 
-class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
-  final WeatherNetworkDataSource _weatherNetworkDataSource;
+class CurrentWeatherRepositoryImpl implements CurrentWeatherRepository {
+  final CurrentWeatherNetworkDataSource _weatherNetworkDataSource;
   final WeatherDetailsEntityMapper _mapper;
   final Logger _logger;
 
-  WeatherForecastRepositoryImpl(
+  CurrentWeatherRepositoryImpl(
     this._weatherNetworkDataSource,
     this._mapper,
     this._logger,

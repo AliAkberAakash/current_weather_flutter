@@ -9,13 +9,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../util/temperature_unit.dart';
 
-class WeatherForecastPortraitScreen extends StatefulWidget {
+class CurrentWeatherPortraitScreen extends StatefulWidget {
   final WeatherDetailsCubit weatherDetailsCubit;
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
   final void Function() onRefresh;
   final void Function(MeasurementUnit) onTemperatureUnitChange;
 
-  const WeatherForecastPortraitScreen({
+  const CurrentWeatherPortraitScreen({
     super.key,
     required this.weatherDetailsUiModelList,
     required this.weatherDetailsCubit,
@@ -24,12 +24,12 @@ class WeatherForecastPortraitScreen extends StatefulWidget {
   });
 
   @override
-  State<WeatherForecastPortraitScreen> createState() =>
-      _WeatherForecastPortraitScreenState();
+  State<CurrentWeatherPortraitScreen> createState() =>
+      _CurrentWeatherPortraitScreenState();
 }
 
-class _WeatherForecastPortraitScreenState
-    extends State<WeatherForecastPortraitScreen> {
+class _CurrentWeatherPortraitScreenState
+    extends State<CurrentWeatherPortraitScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 

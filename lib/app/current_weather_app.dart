@@ -1,4 +1,4 @@
-import 'package:current_weather/features/current_weather/presentation/screen/weather_forecast_screen.dart';
+import 'package:current_weather/features/current_weather/presentation/screen/current_weather_screen.dart';
 import 'package:current_weather_design_system/styles/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class CurrentWeatherApp extends StatelessWidget {
       theme: theme.light(),
       darkTheme: theme.dark(),
       debugShowCheckedModeBanner: false,
-      home: const WeatherForecastScreen(),
+      home: const CurrentWeatherScreen(),
     );
   }
 }

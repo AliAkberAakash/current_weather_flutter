@@ -1,21 +1,21 @@
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
 import 'package:current_weather/env.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/current_weather_response.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
 import 'package:logger/logger.dart';
 
-class WeatherNetworkDataSourceImpl implements WeatherNetworkDataSource {
+class CurrentNetworkDataSourceImpl implements CurrentWeatherNetworkDataSource {
   final NetworkClient _networkClient;
   final Logger _logger;
 
-  WeatherNetworkDataSourceImpl(
+  CurrentNetworkDataSourceImpl(
     this._networkClient,
     this._logger,
   );
 
   @override
-  Future<List<WeeklyWeatherResponse>> getWeatherResponse(
+  Future<List<CurrentWeatherResponse>> getWeatherResponse(
     double lat,
     double lon,
     String unit,
@@ -32,10 +32,10 @@ class WeatherNetworkDataSourceImpl implements WeatherNetworkDataSource {
       );
       final response = await _networkClient.get(networkRequest);
       final weatherDataList = response.body["list"];
-      final List<WeeklyWeatherResponse> weatherList = [];
+      final List<CurrentWeatherResponse> weatherList = [];
 
       for (var weatherData in weatherDataList) {
-        weatherList.add(WeeklyWeatherResponse.fromJson(weatherData));
+        weatherList.add(CurrentWeatherResponse.fromJson(weatherData));
       }
 
       return weatherList;

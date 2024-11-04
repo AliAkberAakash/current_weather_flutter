@@ -1,10 +1,10 @@
 import 'package:current_weather_design_system/styles/util/extensions.dart';
 import 'package:flutter/material.dart';
 
-class ErrorScreen extends StatelessWidget {
+class CurrentWeatherErrorScreen extends StatelessWidget {
   final void Function() onTap;
 
-  const ErrorScreen({
+  const CurrentWeatherErrorScreen({
     super.key,
     required this.onTap,
   });

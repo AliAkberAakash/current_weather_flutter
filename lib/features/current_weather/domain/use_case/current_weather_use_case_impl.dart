@@ -1,12 +1,12 @@
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
-import 'package:current_weather/features/current_weather/domain/repository/weather_forecast_repository.dart';
-import 'package:current_weather/features/current_weather/domain/use_case/weather_forecast_use_case.dart';
+import 'package:current_weather/features/current_weather/domain/repository/current_weather_repository.dart';
+import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case.dart';
 import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 
-class WeatherForecastUseCaseImpl implements WeatherForecastUseCase {
-  final WeatherForecastRepository repository;
+class CurrentWeatherUseCaseImpl implements CurrentWeatherUseCase {
+  final CurrentWeatherRepository repository;
 
-  WeatherForecastUseCaseImpl(
+  CurrentWeatherUseCaseImpl(
     this.repository,
   );
 

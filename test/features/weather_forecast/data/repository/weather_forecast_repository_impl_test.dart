@@ -1,9 +1,9 @@
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
-import 'package:current_weather/features/current_weather/data/repository/weather_forecast_repository_impl.dart';
+import 'package:current_weather/features/current_weather/data/network/dto/current_weather_response.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
+import 'package:current_weather/features/current_weather/data/repository/current_weather_repository_impl.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,13 +13,13 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../utils/common_mocks.dart';
 
 class _MockWeatherNetworkDataSource extends Mock
-    implements WeatherNetworkDataSource {}
+    implements CurrentWeatherNetworkDataSource {}
 
 class _MockWeatherDetailsEntityMapper extends Mock
     implements WeatherDetailsEntityMapper {}
 
 void main() {
-  late WeatherForecastRepositoryImpl repository;
+  late CurrentWeatherRepositoryImpl repository;
   late _MockWeatherNetworkDataSource mockNetworkDataSource;
   late _MockWeatherDetailsEntityMapper mockMapper;
   late Logger mockLogger;
@@ -28,7 +28,7 @@ void main() {
     mockNetworkDataSource = _MockWeatherNetworkDataSource();
     mockMapper = _MockWeatherDetailsEntityMapper();
     mockLogger = MockLogger();
-    repository = WeatherForecastRepositoryImpl(
+    repository = CurrentWeatherRepositoryImpl(
       mockNetworkDataSource,
       mockMapper,
       mockLogger,
@@ -36,7 +36,7 @@ void main() {
   });
 
   group("WeatherForecastRepositoryImpl", () {
-    const weatherDetailsResponse = WeeklyWeatherResponse(
+    const weatherDetailsResponse = CurrentWeatherResponse(
       dateTime: 1234567890,
       weatherDetails: WeatherDetails(
         temp: 15.0,

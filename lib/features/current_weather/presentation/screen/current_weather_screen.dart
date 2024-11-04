@@ -3,21 +3,22 @@ import 'package:current_weather/features/current_weather/presentation/bloc/weath
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_state.dart';
-import 'package:current_weather/features/current_weather/presentation/screen/error_screen.dart';
-import 'package:current_weather/features/current_weather/presentation/screen/weather_forecast_landscape_screen.dart';
-import 'package:current_weather/features/current_weather/presentation/screen/weather_forecast_portrait_screen.dart';
+import 'package:current_weather/features/current_weather/presentation/screen/current_weather_error_screen.dart';
+import 'package:current_weather/features/current_weather/presentation/screen/current_weather_landscape_screen.dart';
+import 'package:current_weather/features/current_weather/presentation/screen/current_weather_loading_screen.dart';
+import 'package:current_weather/features/current_weather/presentation/screen/current_weather_portrait_screen.dart';
 import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WeatherForecastScreen extends StatefulWidget {
-  const WeatherForecastScreen({super.key});
+class CurrentWeatherScreen extends StatefulWidget {
+  const CurrentWeatherScreen({super.key});
 
   @override
-  State<WeatherForecastScreen> createState() => _WeatherForecastScreenState();
+  State<CurrentWeatherScreen> createState() => _CurrentWeatherScreenState();
 }
 
-class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
+class _CurrentWeatherScreenState extends State<CurrentWeatherScreen> {
   final WeatherListBloc weatherListBloc = getIt.get();
   final WeatherDetailsCubit weatherDetailsCubit = getIt.get();
 
@@ -58,7 +59,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
               return OrientationBuilder(
                 builder: (ctx, orientation) {
                   if (orientation == Orientation.portrait) {
-                    return WeatherForecastPortraitScreen(
+                    return CurrentWeatherPortraitScreen(
                       weatherDetailsUiModelList:
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
@@ -66,7 +67,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       onTemperatureUnitChange: _changeTemperatureUnit,
                     );
                   } else {
-                    return WeatherForecastLandscapeScreen(
+                    return CurrentWeatherLandscapeScreen(
                       weatherDetailsUiModelList:
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
@@ -77,12 +78,10 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 },
               );
             } else if (state is WeatherListLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return CurrentWeatherLoadingScreen();
             } else {
               return Center(
-                child: ErrorScreen(
+                child: CurrentWeatherErrorScreen(
                   onTap: _loadWeather,
                 ),
               );

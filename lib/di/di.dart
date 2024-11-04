@@ -2,12 +2,12 @@ import 'package:current_weather/core/network/dio_configuration.dart';
 import 'package:current_weather/core/network/dio_network_client.dart';
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
-import 'package:current_weather/features/current_weather/data/network/weather_network_data_source_impl.dart';
-import 'package:current_weather/features/current_weather/data/repository/weather_forecast_repository_impl.dart';
-import 'package:current_weather/features/current_weather/domain/repository/weather_forecast_repository.dart';
-import 'package:current_weather/features/current_weather/domain/use_case/weather_forecast_use_case.dart';
-import 'package:current_weather/features/current_weather/domain/use_case/weather_forecast_use_case_impl.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
+import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source_impl.dart';
+import 'package:current_weather/features/current_weather/data/repository/current_weather_repository_impl.dart';
+import 'package:current_weather/features/current_weather/domain/repository/current_weather_repository.dart';
+import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case.dart';
+import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case_impl.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_details_cubit.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:dio/dio.dart';
@@ -42,8 +42,8 @@ void setup() {
     ),
   );
 
-  getIt.registerLazySingleton<WeatherNetworkDataSource>(
-    () => WeatherNetworkDataSourceImpl(
+  getIt.registerLazySingleton<CurrentWeatherNetworkDataSource>(
+    () => CurrentNetworkDataSourceImpl(
       getIt.get(),
       getIt.get(),
     ),
@@ -52,16 +52,16 @@ void setup() {
   getIt.registerLazySingleton<WeatherDetailsEntityMapper>(
       () => WeatherDetailsEntityMapperImpl());
 
-  getIt.registerLazySingleton<WeatherForecastRepository>(
-    () => WeatherForecastRepositoryImpl(
+  getIt.registerLazySingleton<CurrentWeatherRepository>(
+    () => CurrentWeatherRepositoryImpl(
       getIt.get(),
       getIt.get(),
       getIt.get(),
     ),
   );
 
-  getIt.registerLazySingleton<WeatherForecastUseCase>(
-    () => WeatherForecastUseCaseImpl(
+  getIt.registerLazySingleton<CurrentWeatherUseCase>(
+    () => CurrentWeatherUseCaseImpl(
       getIt.get(),
     ),
   );
