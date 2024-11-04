@@ -7,6 +7,8 @@ const _shortNameFormat = "EEE";
 const _humidityUnit = "%";
 const _pressureUnit = "hPa";
 const _windSpeedUnit = "km/h";
+const _imageScalingSmall = "@2x";
+const _imageScalingLarge = "@4x";
 
 class WeatherDetailsUiModel extends Equatable {
   final String dayNameFull;
@@ -18,7 +20,8 @@ class WeatherDetailsUiModel extends Equatable {
   final String partOfDay;
   final String weatherCondition;
   final String description;
-  final String icon;
+  final String smallIcon;
+  final String bigIcon;
   final String windSpeed;
 
   const WeatherDetailsUiModel({
@@ -31,7 +34,8 @@ class WeatherDetailsUiModel extends Equatable {
     required this.partOfDay,
     required this.weatherCondition,
     required this.description,
-    required this.icon,
+    required this.smallIcon,
+    required this.bigIcon,
     required this.windSpeed,
   });
 
@@ -55,8 +59,11 @@ class WeatherDetailsUiModel extends Equatable {
       weatherCondition: entity.weather.isNotEmpty ? entity.weather[0].name : "",
       description:
           entity.weather.isNotEmpty ? entity.weather[0].description : "",
-      icon: entity.weather.isNotEmpty
-          ? _getWeatherImageUrl(entity.weather[0].icon)
+      smallIcon: entity.weather.isNotEmpty
+          ? _getWeatherImageIcon(entity.weather[0].icon, _imageScalingSmall)
+          : "",
+      bigIcon: entity.weather.isNotEmpty
+          ? _getWeatherImageIcon(entity.weather[0].icon, _imageScalingLarge)
           : "",
       windSpeed: "${entity.speed} $_windSpeedUnit",
     );
@@ -67,8 +74,8 @@ class WeatherDetailsUiModel extends Equatable {
     return DateFormat(format).format(date);
   }
 
-  static String _getWeatherImageUrl(String imageIcon) {
-    return "https://openweathermap.org/img/wn/$imageIcon@2x.png";
+  static String _getWeatherImageIcon(String imageIcon, String imageScaling) {
+    return "https://openweathermap.org/img/wn/$imageIcon$imageScaling.png";
   }
 
   @override
@@ -82,7 +89,7 @@ class WeatherDetailsUiModel extends Equatable {
         partOfDay,
         weatherCondition,
         description,
-        icon,
+        smallIcon,
         windSpeed,
       ];
 }

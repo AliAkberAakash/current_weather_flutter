@@ -33,6 +33,7 @@ class WeatherForecastLandscapeScreen extends StatelessWidget {
               builder: (ctx, state) {
                 if (state != null) {
                   return WeatherDetailsWidget(
+                    onTemperatureUnitChange: () {},
                     weatherDetailsUiModel: state,
                   );
                 } else {
@@ -41,6 +42,9 @@ class WeatherForecastLandscapeScreen extends StatelessWidget {
                 }
               },
             ),
+          ),
+          SizedBox(
+            width: theme.spacingTokens.cwSpacing8,
           ),
           SizedBox(
             width: 200,

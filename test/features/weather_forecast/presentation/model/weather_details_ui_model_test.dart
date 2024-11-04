@@ -35,7 +35,7 @@ void main() {
     expect(uiModel.partOfDay, 'day');
     expect(uiModel.weatherCondition, 'Clear');
     expect(uiModel.description, 'clear sky');
-    expect(uiModel.icon, 'https://openweathermap.org/img/wn/01d@2x.png');
+    expect(uiModel.smallIcon, 'https://openweathermap.org/img/wn/01d@2x.png');
     expect(uiModel.windSpeed, '15.0 km/h');
   });
 }

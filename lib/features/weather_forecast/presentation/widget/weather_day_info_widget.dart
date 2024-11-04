@@ -33,7 +33,7 @@ class WeatherDayInfoWidget extends StatelessWidget {
                   style: theme.textTheme.titleMedium,
                 ),
                 Image.network(
-                  uiModel.icon,
+                  uiModel.smallIcon,
                 ),
                 Text(
                   "${uiModel.tempMax}°/${uiModel.tempMax}°",

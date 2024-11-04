@@ -33,6 +33,7 @@ class WeatherForecastPortraitScreen extends StatelessWidget {
               builder: (ctx, state) {
                 if (state != null) {
                   return WeatherDetailsWidget(
+                    onTemperatureUnitChange: () {},
                     weatherDetailsUiModel: state,
                   );
                 } else {

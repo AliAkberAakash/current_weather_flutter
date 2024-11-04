@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class WeatherDetailsWidget extends StatelessWidget {
   final WeatherDetailsUiModel weatherDetailsUiModel;
+  final void Function() onTemperatureUnitChange;
 
   const WeatherDetailsWidget({
     super.key,
     required this.weatherDetailsUiModel,
+    required this.onTemperatureUnitChange,
   });
 
   @override
@@ -23,18 +25,29 @@ class WeatherDetailsWidget extends StatelessWidget {
           weatherDetailsUiModel.dayNameFull,
           style: theme.textTheme.titleLarge,
         ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            weatherDetailsUiModel.weatherCondition,
-            style: theme.textTheme.titleMedium,
-          ),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              weatherDetailsUiModel.weatherCondition,
+              style: theme.textTheme.titleMedium,
+            ),
+            Text(
+              "°C",
+              style: theme.textTheme.titleMedium!.copyWith(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.blue,
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: theme.spacingTokens.cwSpacing8,
         ),
         Image.network(
-          weatherDetailsUiModel.icon,
+          weatherDetailsUiModel.bigIcon,
         ),
         Text(
           "${weatherDetailsUiModel.tempMax}°",
