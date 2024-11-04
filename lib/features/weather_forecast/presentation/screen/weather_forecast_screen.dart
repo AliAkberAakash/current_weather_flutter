@@ -52,14 +52,14 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
             },
           )
         ],
-        child: BlocBuilder<WeatherListBloc, WeatherListState>(
-          bloc: weatherListBloc,
-          builder: (ctx, state) {
-            if (state is WeatherListLoadedState) {
-              return SmartRefresher(
-                controller: _refreshController,
-                onRefresh: _onRefresh,
-                child: OrientationBuilder(
+        child: SmartRefresher(
+          controller: _refreshController,
+          onRefresh: _onRefresh,
+          child: BlocBuilder<WeatherListBloc, WeatherListState>(
+            bloc: weatherListBloc,
+            builder: (ctx, state) {
+              if (state is WeatherListLoadedState) {
+                return OrientationBuilder(
                   builder: (ctx, orientation) {
                     if (orientation == Orientation.portrait) {
                       return WeatherForecastPortraitScreen(
@@ -75,20 +75,20 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       );
                     }
                   },
-                ),
-              );
-            } else if (state is WeatherListLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return Center(
-                child: ErrorScreen(
-                  onTap: _onRefresh,
-                ),
-              );
-            }
-          },
+                );
+              } else if (state is WeatherListLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Center(
+                  child: ErrorScreen(
+                    onTap: _onRefresh,
+                  ),
+                );
+              }
+            },
+          ),
         ),
       ),
     );

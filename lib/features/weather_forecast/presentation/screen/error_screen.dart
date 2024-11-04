@@ -11,14 +11,18 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final theme = context.theme;
 
     return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           "Something went wrong",
           style: theme.textTheme.titleMedium,
+        ),
+        SizedBox(
+          height: theme.spacingTokens.cwSpacing32,
         ),
         MaterialButton(
           onPressed: onTap,
