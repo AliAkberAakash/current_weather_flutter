@@ -1,4 +1,5 @@
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
@@ -9,6 +10,8 @@ const _pressureUnit = "hPa";
 const _windSpeedUnit = "km/h";
 const _imageScalingSmall = "@2x";
 const _imageScalingLarge = "@4x";
+const _celsiusUnit = "°C";
+const _fahrenheitUnit = "°F";
 
 class WeatherDetailsUiModel extends Equatable {
   final String dayNameFull;
@@ -23,6 +26,8 @@ class WeatherDetailsUiModel extends Equatable {
   final String smallIcon;
   final String bigIcon;
   final String windSpeed;
+  final MeasurementUnit measurementUnit;
+  final String temperatureUnit;
 
   const WeatherDetailsUiModel({
     required this.dayNameFull,
@@ -37,6 +42,8 @@ class WeatherDetailsUiModel extends Equatable {
     required this.smallIcon,
     required this.bigIcon,
     required this.windSpeed,
+    required this.measurementUnit,
+    required this.temperatureUnit,
   });
 
   factory WeatherDetailsUiModel.fromWeatherDetailsEntity(
@@ -66,6 +73,8 @@ class WeatherDetailsUiModel extends Equatable {
           ? _getWeatherImageIcon(entity.weather[0].icon, _imageScalingLarge)
           : "",
       windSpeed: "${entity.speed} $_windSpeedUnit",
+      measurementUnit: entity.unit,
+      temperatureUnit: _getMeasurementUnit(entity.unit),
     );
   }
 
@@ -76,6 +85,14 @@ class WeatherDetailsUiModel extends Equatable {
 
   static String _getWeatherImageIcon(String imageIcon, String imageScaling) {
     return "https://openweathermap.org/img/wn/$imageIcon$imageScaling.png";
+  }
+
+  static String _getMeasurementUnit(MeasurementUnit measurementUnit) {
+    if (measurementUnit == MeasurementUnit.metric) {
+      return _celsiusUnit;
+    }
+
+    return _fahrenheitUnit;
   }
 
   @override

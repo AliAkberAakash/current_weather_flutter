@@ -6,6 +6,7 @@ import 'package:current_weather/features/weather_forecast/data/network/dto/weekl
 import 'package:current_weather/features/weather_forecast/data/network/weather_network_data_source.dart';
 import 'package:current_weather/features/weather_forecast/data/repository/weather_forecast_repository_impl.dart';
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
@@ -71,6 +72,7 @@ void main() {
         ),
       ],
       speed: 5.0,
+      unit: MeasurementUnit.metric,
     );
     const expectedResult = [weatherDetailsEntity];
 
@@ -79,14 +81,17 @@ void main() {
         () async {
       when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
           .thenAnswer((_) => Future.value(mockResponse));
-      when(() =>
-              mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse))
-          .thenAnswer((_) => weatherDetailsEntity);
+      when(
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
+      ).thenAnswer((_) => weatherDetailsEntity);
 
       final result = await repository.getWeatherDetails(
         -10,
         -20,
-        "metric",
+        MeasurementUnit.metric,
       );
 
       expect(result, expectedResult);
@@ -94,7 +99,10 @@ void main() {
         () => mockNetworkDataSource.getWeatherResponse(mockRequest),
       ).called(1);
       verify(
-        () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
       ).called(1);
       verifyNever(
         () => mockLogger.d(any()),
@@ -111,7 +119,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
-          "metric",
+          MeasurementUnit.metric,
         ),
         throwsA(isA<NetworkException>()),
       );
@@ -119,7 +127,10 @@ void main() {
         () => mockNetworkDataSource.getWeatherResponse(mockRequest),
       ).called(1);
       verifyNever(
-        () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
       );
       verify(
         () => mockLogger.d("NetworkException()"),
@@ -136,7 +147,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
-          "metric",
+          MeasurementUnit.metric,
         ),
         throwsA(isA<NetworkTimeoutException>()),
       );
@@ -144,7 +155,10 @@ void main() {
         () => mockNetworkDataSource.getWeatherResponse(mockRequest),
       ).called(1);
       verifyNever(
-        () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
       );
       verify(
         () => mockLogger.d("NetworkTimeoutException()"),
@@ -161,7 +175,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
-          "metric",
+          MeasurementUnit.metric,
         ),
         throwsA(isA<ServerException>()),
       );
@@ -169,7 +183,10 @@ void main() {
         () => mockNetworkDataSource.getWeatherResponse(mockRequest),
       ).called(1);
       verifyNever(
-        () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
       );
       verify(
         () => mockLogger.d("ServerException(null, null)"),
@@ -186,7 +203,7 @@ void main() {
         repository.getWeatherDetails(
           -10,
           -20,
-          "metric",
+          MeasurementUnit.metric,
         ),
         throwsA(isA<FormatException>()),
       );
@@ -194,7 +211,10 @@ void main() {
         () => mockNetworkDataSource.getWeatherResponse(mockRequest),
       ).called(1);
       verifyNever(
-        () => mockMapper.mapFromWeeklyWeatherResponse(weatherDetailsResponse),
+        () => mockMapper.mapFromWeeklyWeatherResponse(
+          weatherDetailsResponse,
+          MeasurementUnit.metric,
+        ),
       );
       verify(
         () => mockLogger.d("FormatException"),

@@ -3,6 +3,7 @@ import 'package:current_weather/features/weather_forecast/data/network/dto/weath
 import 'package:current_weather/features/weather_forecast/data/network/weather_network_data_source.dart';
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/weather_forecast/domain/repository/weather_forecast_repository.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:logger/logger.dart';
 
 class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
@@ -20,16 +21,24 @@ class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
   Future<List<WeatherDetailsEntity>> getWeatherDetails(
     double lat,
     double lon,
-    String unit,
+    MeasurementUnit unit,
   ) async {
     try {
-      final request = WeatherQueryRequest(lat, lon, unit);
+      final request = WeatherQueryRequest(
+        lat,
+        lon,
+        unit.name,
+      );
       final response =
           await _weatherNetworkDataSource.getWeatherResponse(request);
 
       return response
-          .map((weatherDetails) =>
-              _mapper.mapFromWeeklyWeatherResponse(weatherDetails))
+          .map(
+            (weatherDetails) => _mapper.mapFromWeeklyWeatherResponse(
+              weatherDetails,
+              unit,
+            ),
+          )
           .toList();
     } catch (e) {
       _logger.d(e.toString());

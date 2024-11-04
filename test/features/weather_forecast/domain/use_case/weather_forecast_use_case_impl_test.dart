@@ -3,6 +3,7 @@ import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/weather_forecast/domain/repository/weather_forecast_repository.dart';
 import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case_impl.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -21,7 +22,7 @@ void main() {
   group('WeatherForecastUseCaseImpl', () {
     const double lat = 52.52;
     const double lon = 13.405;
-    const String unit = 'metric';
+    const MeasurementUnit unit = MeasurementUnit.metric;
     const weatherDetailsEntityList = [
       WeatherDetailsEntity(
         dateTime: 1234567890,
@@ -38,6 +39,7 @@ void main() {
           )
         ],
         speed: 5.0,
+        unit: MeasurementUnit.metric,
       ),
     ];
 

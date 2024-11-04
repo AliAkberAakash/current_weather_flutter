@@ -1,5 +1,6 @@
 import 'package:current_weather/features/weather_forecast/data/mapper/weather_details_entity_mapper.dart';
 import 'package:current_weather/features/weather_forecast/data/network/dto/weekly_weather_response.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -24,7 +25,10 @@ void main() {
         sys: Sys(partOfDay: "d"),
       );
 
-      final result = mapper.mapFromWeeklyWeatherResponse(weeklyWeatherResponse);
+      final result = mapper.mapFromWeeklyWeatherResponse(
+        weeklyWeatherResponse,
+        MeasurementUnit.metric,
+      );
 
       expect(result.dateTime, equals(1234567890));
       expect(result.tempMin, equals(15.0));

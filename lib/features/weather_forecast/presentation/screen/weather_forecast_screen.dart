@@ -6,6 +6,7 @@ import 'package:current_weather/features/weather_forecast/presentation/bloc/weat
 import 'package:current_weather/features/weather_forecast/presentation/screen/error_screen.dart';
 import 'package:current_weather/features/weather_forecast/presentation/screen/weather_forecast_landscape_screen.dart';
 import 'package:current_weather/features/weather_forecast/presentation/screen/weather_forecast_portrait_screen.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +23,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
 
   @override
   void initState() {
-    weatherListBloc.add(WeatherListLoadEvent());
+    _loadWeather();
     super.initState();
   }
 
@@ -61,14 +62,14 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       weatherDetailsUiModelList:
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
-                      onRefresh: _onRefresh,
+                      onRefresh: _loadWeather,
                     );
                   } else {
                     return WeatherForecastLandscapeScreen(
                       weatherDetailsUiModelList:
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
-                      onRefresh: _onRefresh,
+                      onRefresh: () => _loadWeather,
                     );
                   }
                 },
@@ -80,7 +81,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
             } else {
               return Center(
                 child: ErrorScreen(
-                  onTap: _onRefresh,
+                  onTap: _loadWeather,
                 ),
               );
             }
@@ -90,7 +91,13 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     );
   }
 
-  void _onRefresh() {
-    weatherListBloc.add(WeatherListLoadEvent());
+  void _loadWeather() {
+    weatherListBloc.add(
+      WeatherListLoadEvent(
+        lat: 12.2,
+        lon: 22.2,
+        unit: MeasurementUnit.metric,
+      ),
+    );
   }
 }

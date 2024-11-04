@@ -33,12 +33,15 @@ class WeatherDetailsWidget extends StatelessWidget {
               weatherDetailsUiModel.weatherCondition,
               style: theme.textTheme.titleMedium,
             ),
-            Text(
-              "°C",
-              style: theme.textTheme.titleMedium!.copyWith(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blue,
+            InkWell(
+              onTap: onTemperatureUnitChange,
+              child: Text(
+                weatherDetailsUiModel.temperatureUnit,
+                style: theme.textTheme.titleMedium!.copyWith(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.blue,
+                ),
               ),
             ),
           ],

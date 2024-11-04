@@ -21,9 +21,9 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     try {
       final List<WeatherDetailsEntity> response =
           await useCase.getWeatherDetails(
-        52.490881,
-        13.392895,
-        "metric",
+        event.lat,
+        event.lon,
+        event.unit,
       );
 
       final List<WeatherDetailsUiModel> weatherDetailsUiModelList = response

@@ -1,15 +1,20 @@
 import 'package:current_weather/features/weather_forecast/data/network/dto/weekly_weather_response.dart';
 import 'package:current_weather/features/weather_forecast/domain/entity/weather_details_entity.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 
 abstract class WeatherDetailsEntityMapper {
   WeatherDetailsEntity mapFromWeeklyWeatherResponse(
-      WeeklyWeatherResponse response);
+    WeeklyWeatherResponse response,
+    MeasurementUnit unit,
+  );
 }
 
 class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
   @override
   WeatherDetailsEntity mapFromWeeklyWeatherResponse(
-      WeeklyWeatherResponse response) {
+    WeeklyWeatherResponse response,
+    MeasurementUnit unit,
+  ) {
     return WeatherDetailsEntity(
       dateTime: response.dateTime,
       tempMin: response.weatherDetails.tempMin,
@@ -21,10 +26,13 @@ class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
           .map((response) => _mapFromWeather(response))
           .toList(),
       speed: response.wind.speed,
+      unit: unit,
     );
   }
 
-  WeatherEntity _mapFromWeather(Weather response) {
+  WeatherEntity _mapFromWeather(
+    Weather response,
+  ) {
     return WeatherEntity(
       name: response.name,
       description: response.description,

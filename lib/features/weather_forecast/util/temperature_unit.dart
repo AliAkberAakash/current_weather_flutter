@@ -1,4 +1,4 @@
-enum TemperatureUnit {
+enum MeasurementUnit {
   metric,
   imperial,
 }

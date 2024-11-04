@@ -1,3 +1,5 @@
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
+
 class WeatherDetailsEntity {
   final int dateTime;
   final double tempMin;
@@ -7,6 +9,7 @@ class WeatherDetailsEntity {
   final String partOfDay;
   final List<WeatherEntity> weather;
   final double speed;
+  final MeasurementUnit unit;
 
   const WeatherDetailsEntity({
     required this.dateTime,
@@ -17,6 +20,7 @@ class WeatherDetailsEntity {
     required this.partOfDay,
     required this.weather,
     required this.speed,
+    required this.unit,
   });
 }
 
