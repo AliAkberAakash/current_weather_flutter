@@ -5,7 +5,6 @@ import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
 import 'package:current_weather/core/network/network_response.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weather_query_request.dart';
 import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
 import 'package:current_weather/features/current_weather/data/network/weather_network_data_source_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -51,11 +50,6 @@ void main() {
         );
         when(() => networkClient.get(mockNetworkRequest))
             .thenAnswer((_) async => mockResponse);
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-          "metric",
-        );
         var expectedResult = const [
           WeeklyWeatherResponse(
             dateTime: 1730548800,
@@ -78,8 +72,11 @@ void main() {
           ),
         ];
 
-        final result =
-            await weatherNetworkDataSource.getWeatherResponse(actualRequest);
+        final result = await weatherNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        );
 
         expect(result, expectedResult);
         verify(
@@ -102,14 +99,12 @@ void main() {
         when(() => networkClient.get(mockNetworkRequest))
             .thenThrow(const NetworkException());
 
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-          "metric",
-        );
-
         expect(
-          weatherNetworkDataSource.getWeatherResponse(actualRequest),
+          weatherNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          ),
           throwsA(isA<NetworkException>()),
         );
 
@@ -133,14 +128,12 @@ void main() {
         when(() => networkClient.get(mockNetworkRequest))
             .thenThrow(const NetworkTimeoutException());
 
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-          "metric",
-        );
-
         expect(
-          weatherNetworkDataSource.getWeatherResponse(actualRequest),
+          weatherNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          ),
           throwsA(isA<NetworkTimeoutException>()),
         );
 
@@ -164,14 +157,12 @@ void main() {
         when(() => networkClient.get(mockNetworkRequest))
             .thenThrow(const ServerException());
 
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-          "metric",
-        );
-
         expect(
-          weatherNetworkDataSource.getWeatherResponse(actualRequest),
+          weatherNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          ),
           throwsA(isA<ServerException>()),
         );
 
@@ -195,14 +186,12 @@ void main() {
         when(() => networkClient.get(mockNetworkRequest))
             .thenThrow(const FormatException());
 
-        const WeatherQueryRequest actualRequest = WeatherQueryRequest(
-          50.221291,
-          9.968617,
-          "metric",
-        );
-
         expect(
-          weatherNetworkDataSource.getWeatherResponse(actualRequest),
+          weatherNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          ),
           throwsA(isA<FormatException>()),
         );
 

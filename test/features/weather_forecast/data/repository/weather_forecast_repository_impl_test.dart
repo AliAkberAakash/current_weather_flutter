@@ -1,7 +1,6 @@
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weather_query_request.dart';
 import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
 import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/data/repository/weather_forecast_repository_impl.dart';
@@ -37,7 +36,6 @@ void main() {
   });
 
   group("WeatherForecastRepositoryImpl", () {
-    const mockRequest = WeatherQueryRequest(-10, -20, "metric");
     const weatherDetailsResponse = WeeklyWeatherResponse(
       dateTime: 1234567890,
       weatherDetails: WeatherDetails(
@@ -81,8 +79,13 @@ void main() {
     test(
         "getWeatherDetails returns WeatherDetailsEntity when network data source returns WeatherDetailsResponse",
         () async {
-      when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
-          .thenAnswer((_) => Future.value(mockResponse));
+      when(
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
+      ).thenAnswer((_) => Future.value(mockResponse));
       when(
         () => mockMapper.mapFromWeeklyWeatherResponse(
           weatherDetailsResponse,
@@ -98,7 +101,11 @@ void main() {
 
       expect(result, expectedResult);
       verify(
-        () => mockNetworkDataSource.getWeatherResponse(mockRequest),
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
       ).called(1);
       verify(
         () => mockMapper.mapFromWeeklyWeatherResponse(
@@ -114,8 +121,11 @@ void main() {
     test(
         "getWeatherDetails throws NetworkException when network data source throws NetworkException",
         () async {
-      when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
-          .thenThrow(const NetworkException());
+      when(() => mockNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          )).thenThrow(const NetworkException());
 
       expect(
         repository.getWeatherDetails(
@@ -126,7 +136,11 @@ void main() {
         throwsA(isA<NetworkException>()),
       );
       verify(
-        () => mockNetworkDataSource.getWeatherResponse(mockRequest),
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
       ).called(1);
       verifyNever(
         () => mockMapper.mapFromWeeklyWeatherResponse(
@@ -142,8 +156,11 @@ void main() {
     test(
         "getWeatherDetails throws NetworkTimeoutException when network data source throws NetworkTimeoutException",
         () async {
-      when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
-          .thenThrow(const NetworkTimeoutException());
+      when(() => mockNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          )).thenThrow(const NetworkTimeoutException());
 
       expect(
         repository.getWeatherDetails(
@@ -154,7 +171,11 @@ void main() {
         throwsA(isA<NetworkTimeoutException>()),
       );
       verify(
-        () => mockNetworkDataSource.getWeatherResponse(mockRequest),
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
       ).called(1);
       verifyNever(
         () => mockMapper.mapFromWeeklyWeatherResponse(
@@ -170,8 +191,11 @@ void main() {
     test(
         "getWeatherDetails throws ServerException when network data source throws ServerException",
         () async {
-      when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
-          .thenThrow(const ServerException());
+      when(() => mockNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          )).thenThrow(const ServerException());
 
       expect(
         repository.getWeatherDetails(
@@ -182,7 +206,11 @@ void main() {
         throwsA(isA<ServerException>()),
       );
       verify(
-        () => mockNetworkDataSource.getWeatherResponse(mockRequest),
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
       ).called(1);
       verifyNever(
         () => mockMapper.mapFromWeeklyWeatherResponse(
@@ -198,8 +226,11 @@ void main() {
     test(
         "getWeatherDetails rethrows any other exception when network data source throws exception",
         () async {
-      when(() => mockNetworkDataSource.getWeatherResponse(mockRequest))
-          .thenThrow(const FormatException());
+      when(() => mockNetworkDataSource.getWeatherResponse(
+            50.221291,
+            9.968617,
+            "metric",
+          )).thenThrow(const FormatException());
 
       expect(
         repository.getWeatherDetails(
@@ -210,7 +241,11 @@ void main() {
         throwsA(isA<FormatException>()),
       );
       verify(
-        () => mockNetworkDataSource.getWeatherResponse(mockRequest),
+        () => mockNetworkDataSource.getWeatherResponse(
+          50.221291,
+          9.968617,
+          "metric",
+        ),
       ).called(1);
       verifyNever(
         () => mockMapper.mapFromWeeklyWeatherResponse(

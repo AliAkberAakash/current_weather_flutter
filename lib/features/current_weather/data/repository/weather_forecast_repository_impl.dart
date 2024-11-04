@@ -1,5 +1,4 @@
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weather_query_request.dart';
 import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/current_weather/domain/repository/weather_forecast_repository.dart';
@@ -24,13 +23,11 @@ class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
     MeasurementUnit unit,
   ) async {
     try {
-      final request = WeatherQueryRequest(
+      final response = await _weatherNetworkDataSource.getWeatherResponse(
         lat,
         lon,
         unit.name,
       );
-      final response =
-          await _weatherNetworkDataSource.getWeatherResponse(request);
 
       return response
           .map(

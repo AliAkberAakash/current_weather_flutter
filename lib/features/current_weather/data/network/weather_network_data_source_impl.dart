@@ -1,7 +1,6 @@
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
 import 'package:current_weather/env.dart';
-import 'package:current_weather/features/current_weather/data/network/dto/weather_query_request.dart';
 import 'package:current_weather/features/current_weather/data/network/dto/weekly_weather_response.dart';
 import 'package:current_weather/features/current_weather/data/network/weather_network_data_source.dart';
 import 'package:logger/logger.dart';
@@ -17,15 +16,18 @@ class WeatherNetworkDataSourceImpl implements WeatherNetworkDataSource {
 
   @override
   Future<List<WeeklyWeatherResponse>> getWeatherResponse(
-      WeatherQueryRequest request) async {
+    double lat,
+    double lon,
+    String unit,
+  ) async {
     try {
       final networkRequest = NetworkRequest(
         url: "forecast",
         queryParams: {
-          "lat": request.lat.toString(),
-          "lon": request.lon.toString(),
+          "lat": lat.toString(),
+          "lon": lon.toString(),
           "appId": apiKey,
-          "units": request.unit,
+          "units": unit,
         },
       );
       final response = await _networkClient.get(networkRequest);
