@@ -7,11 +7,14 @@ const _fullNameFormat = "EEEE";
 const _shortNameFormat = "EEE";
 const _humidityUnit = "%";
 const _pressureUnit = "hPa";
-const _windSpeedUnit = "km/h";
+const _windSpeedUnitMetric = "m/s";
+const _windSpeedUnitImperial = "mph";
 const _imageScalingSmall = "@2x";
 const _imageScalingLarge = "@4x";
 const _celsiusUnit = "°C";
 const _fahrenheitUnit = "°F";
+const _imageBaseUrl = "https://openweathermap.org/img/wn/";
+const _imageExt = ".png";
 
 class WeatherDetailsUiModel extends Equatable {
   final String dayNameFull;
@@ -72,10 +75,18 @@ class WeatherDetailsUiModel extends Equatable {
       bigIcon: entity.weather.isNotEmpty
           ? _getWeatherImageIcon(entity.weather[0].icon, _imageScalingLarge)
           : "",
-      windSpeed: "${entity.speed} $_windSpeedUnit",
+      windSpeed: _getWindSpeedWithUnit(entity.speed, entity.unit),
       measurementUnit: entity.unit,
       temperatureUnit: _getMeasurementUnit(entity.unit),
     );
+  }
+
+  static String _getWindSpeedWithUnit(double windSpeed, MeasurementUnit unit) {
+    final speed = windSpeed.toStringAsFixed(2);
+    if (unit == MeasurementUnit.metric) {
+      return "$speed $_windSpeedUnitMetric";
+    }
+    return "$speed $_windSpeedUnitImperial";
   }
 
   static String _getDayNameFromTimeStamp(int timestamp, String format) {
@@ -84,7 +95,7 @@ class WeatherDetailsUiModel extends Equatable {
   }
 
   static String _getWeatherImageIcon(String imageIcon, String imageScaling) {
-    return "https://openweathermap.org/img/wn/$imageIcon$imageScaling.png";
+    return "$_imageBaseUrl$imageIcon$imageScaling$_imageExt";
   }
 
   static String _getMeasurementUnit(MeasurementUnit measurementUnit) {
