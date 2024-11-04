@@ -47,7 +47,7 @@ class WeatherDetailsWidget extends StatelessWidget {
           height: theme.spacingTokens.cwSpacing8,
         ),
         Image.network(
-          weatherDetailsUiModel.bigIcon,
+          weatherDetailsUiModel.smallIcon,
         ),
         Text(
           "${weatherDetailsUiModel.tempMax}°",
