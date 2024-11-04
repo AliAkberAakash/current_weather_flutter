@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 const int _networkTimeoutDurationSeconds = 10;
 const String _stagingUrl = "https://api.openweathermap.org/data/2.5/";
@@ -12,7 +13,7 @@ const String _contentTypeJson = 'application/json';
 /// Production url here
 BaseOptions configureDio() {
   final options = BaseOptions(
-    baseUrl: _prodUrl,
+    baseUrl: (kDebugMode) ? _stagingUrl : _prodUrl,
     contentType: _contentTypeJson,
     responseType: ResponseType.json,
     sendTimeout: const Duration(seconds: _networkTimeoutDurationSeconds),
