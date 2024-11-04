@@ -1,5 +1,6 @@
 import 'package:current_weather/core/network/network_client.dart';
 import 'package:current_weather/core/network/network_request.dart';
+import 'package:current_weather/env.dart';
 import 'package:current_weather/features/weather_forecast/data/network/dto/weather_query_request.dart';
 import 'package:current_weather/features/weather_forecast/data/network/dto/weekly_weather_response.dart';
 import 'package:current_weather/features/weather_forecast/data/network/weather_network_data_source.dart';
@@ -23,7 +24,7 @@ class WeatherNetworkDataSourceImpl implements WeatherNetworkDataSource {
         queryParams: {
           "lat": request.lat.toString(),
           "lon": request.lon.toString(),
-          "appId": "112b57f4be025fddcb03a568ee3b40a6",
+          "appId": apiKey,
           "units": request.unit,
         },
       );
