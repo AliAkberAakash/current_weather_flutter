@@ -9,11 +9,26 @@ class WeatherListLoadEvent extends WeatherListEvent {
   final MeasurementUnit unit;
 
   WeatherListLoadEvent({
-    required this.lat,
-    required this.lon,
+    this.lat = 10.2,
+    this.lon = -20.3,
+    this.unit = MeasurementUnit.metric,
+  });
+
+  @override
+  List<Object?> get props => [lat, lon, unit];
+}
+
+class WeatherListChangeTemperatureEvent extends WeatherListEvent {
+  final double lat;
+  final double lon;
+  final MeasurementUnit unit;
+
+  WeatherListChangeTemperatureEvent({
+    this.lat = 10.2,
+    this.lon = -20.3,
     required this.unit,
   });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [lat, lon, unit];
 }

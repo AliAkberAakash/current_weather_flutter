@@ -2,6 +2,7 @@ import 'package:current_weather/features/weather_forecast/presentation/bloc/weat
 import 'package:current_weather/features/weather_forecast/presentation/model/weather_details_ui_model.dart';
 import 'package:current_weather/features/weather_forecast/presentation/widget/weather_day_info_widget.dart';
 import 'package:current_weather/features/weather_forecast/presentation/widget/weather_details_widget.dart';
+import 'package:current_weather/features/weather_forecast/util/temperature_unit.dart';
 import 'package:current_weather_design_system/styles/util/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,12 +12,14 @@ class WeatherForecastLandscapeScreen extends StatefulWidget {
   final WeatherDetailsCubit weatherDetailsCubit;
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
   final void Function() onRefresh;
+  final void Function(MeasurementUnit unit) onTemperatureUnitChange;
 
   const WeatherForecastLandscapeScreen({
     super.key,
     required this.weatherDetailsUiModelList,
     required this.weatherDetailsCubit,
     required this.onRefresh,
+    required this.onTemperatureUnitChange,
   });
 
   @override
@@ -55,11 +58,13 @@ class _WeatherForecastLandscapeScreenState
                 builder: (ctx, state) {
                   if (state != null) {
                     return WeatherDetailsWidget(
-                      onTemperatureUnitChange: () {},
+                      onTemperatureUnitChange: () =>
+                          widget.onTemperatureUnitChange(
+                        state.measurementUnit,
+                      ),
                       weatherDetailsUiModel: state,
                     );
                   } else {
-                    // todo: add a shimmer
                     return const SizedBox();
                   }
                 },

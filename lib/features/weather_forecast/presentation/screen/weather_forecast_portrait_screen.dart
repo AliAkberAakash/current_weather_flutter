@@ -7,16 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../util/temperature_unit.dart';
+
 class WeatherForecastPortraitScreen extends StatefulWidget {
   final WeatherDetailsCubit weatherDetailsCubit;
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
   final void Function() onRefresh;
+  final void Function(MeasurementUnit) onTemperatureUnitChange;
 
   const WeatherForecastPortraitScreen({
     super.key,
     required this.weatherDetailsUiModelList,
     required this.weatherDetailsCubit,
     required this.onRefresh,
+    required this.onTemperatureUnitChange,
   });
 
   @override
@@ -55,7 +59,10 @@ class _WeatherForecastPortraitScreenState
                 builder: (ctx, state) {
                   if (state != null) {
                     return WeatherDetailsWidget(
-                      onTemperatureUnitChange: () {},
+                      onTemperatureUnitChange: () =>
+                          widget.onTemperatureUnitChange(
+                        state.measurementUnit,
+                      ),
                       weatherDetailsUiModel: state,
                     );
                   } else {

@@ -63,6 +63,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
                       onRefresh: _loadWeather,
+                      onTemperatureUnitChange: _changeTemperatureUnit,
                     );
                   } else {
                     return WeatherForecastLandscapeScreen(
@@ -70,6 +71,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
                       onRefresh: () => _loadWeather,
+                      onTemperatureUnitChange: _changeTemperatureUnit,
                     );
                   }
                 },
@@ -91,13 +93,17 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     );
   }
 
+  void _changeTemperatureUnit(MeasurementUnit unit) {
+    weatherListBloc.add(
+      WeatherListChangeTemperatureEvent(
+        unit: unit,
+      ),
+    );
+  }
+
   void _loadWeather() {
     weatherListBloc.add(
-      WeatherListLoadEvent(
-        lat: 12.2,
-        lon: 22.2,
-        unit: MeasurementUnit.metric,
-      ),
+      WeatherListLoadEvent(),
     );
   }
 }
