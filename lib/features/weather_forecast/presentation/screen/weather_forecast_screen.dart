@@ -3,8 +3,9 @@ import 'package:current_weather/features/weather_forecast/presentation/bloc/weat
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_state.dart';
-import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_landscape_screen.dart';
-import 'package:current_weather/features/weather_forecast/presentation/weather_forecast_portrait_screen.dart';
+import 'package:current_weather/features/weather_forecast/presentation/screen/error_screen.dart';
+import 'package:current_weather/features/weather_forecast/presentation/screen/weather_forecast_landscape_screen.dart';
+import 'package:current_weather/features/weather_forecast/presentation/screen/weather_forecast_portrait_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -81,7 +82,11 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                 child: CircularProgressIndicator(),
               );
             } else {
-              return const Text("Error");
+              return Center(
+                child: ErrorScreen(
+                  onTap: _onRefresh,
+                ),
+              );
             }
           },
         ),
