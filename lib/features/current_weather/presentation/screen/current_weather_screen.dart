@@ -7,7 +7,7 @@ import 'package:current_weather/features/current_weather/presentation/screen/cur
 import 'package:current_weather/features/current_weather/presentation/screen/current_weather_landscape_screen.dart';
 import 'package:current_weather/features/current_weather/presentation/screen/current_weather_loading_screen.dart';
 import 'package:current_weather/features/current_weather/presentation/screen/current_weather_portrait_screen.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

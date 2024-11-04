@@ -5,7 +5,7 @@ import 'package:current_weather/features/current_weather/data/network/dto/curren
 import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/data/repository/current_weather_repository_impl.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';

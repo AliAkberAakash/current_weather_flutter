@@ -2,7 +2,7 @@ import 'package:current_weather/features/current_weather/presentation/bloc/weath
 import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
 import 'package:current_weather/features/current_weather/presentation/widget/weather_day_info_widget.dart';
 import 'package:current_weather/features/current_weather/presentation/widget/weather_details_widget.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:current_weather_design_system/styles/util/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

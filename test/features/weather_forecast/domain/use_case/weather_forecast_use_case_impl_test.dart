@@ -3,7 +3,7 @@ import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/current_weather/domain/repository/current_weather_repository.dart';
 import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case_impl.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

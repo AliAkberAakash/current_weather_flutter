@@ -7,7 +7,7 @@ import 'package:current_weather/features/current_weather/presentation/bloc/error
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_state.dart';
 import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {

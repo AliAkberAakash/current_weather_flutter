@@ -2,7 +2,7 @@ import 'package:current_weather/features/current_weather/data/mapper/weather_det
 import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/current_weather/domain/repository/current_weather_repository.dart';
-import 'package:current_weather/features/current_weather/util/temperature_unit.dart';
+import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 import 'package:logger/logger.dart';
 
 class CurrentWeatherRepositoryImpl implements CurrentWeatherRepository {
