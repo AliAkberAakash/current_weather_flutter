@@ -17,6 +17,7 @@ class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
   ) {
     return WeatherDetailsEntity(
       dateTime: response.dateTime,
+      temp: response.weatherDetails.temp,
       tempMin: response.weatherDetails.tempMin,
       tempMax: response.weatherDetails.tempMax,
       pressure: response.weatherDetails.pressure,

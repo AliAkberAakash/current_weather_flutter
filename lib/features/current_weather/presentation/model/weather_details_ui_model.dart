@@ -19,6 +19,7 @@ const _imageExt = ".png";
 class WeatherDetailsUiModel extends Equatable {
   final String dayNameFull;
   final String dayNameShort;
+  final String temp;
   final String tempMin;
   final String tempMax;
   final String pressure;
@@ -35,6 +36,7 @@ class WeatherDetailsUiModel extends Equatable {
   const WeatherDetailsUiModel({
     required this.dayNameFull,
     required this.dayNameShort,
+    required this.temp,
     required this.tempMin,
     required this.tempMax,
     required this.pressure,
@@ -61,8 +63,9 @@ class WeatherDetailsUiModel extends Equatable {
         entity.dateTime,
         _shortNameFormat,
       ),
-      tempMin: entity.tempMin.toString(),
-      tempMax: entity.tempMax.toString(),
+      temp: "${entity.temp.toStringAsFixed(2)}°",
+      tempMin: "${entity.tempMin.toStringAsFixed(2)}°",
+      tempMax: "${entity.tempMax.toStringAsFixed(2)}°",
       pressure: "${entity.pressure} $_pressureUnit",
       humidity: "${entity.humidity} $_humidityUnit",
       partOfDay: entity.partOfDay,

@@ -36,7 +36,7 @@ class WeatherDayInfoWidget extends StatelessWidget {
                   uiModel.smallIcon,
                 ),
                 Text(
-                  "${uiModel.tempMax}°/${uiModel.tempMax}°",
+                  "${uiModel.tempMax}/${uiModel.tempMax}",
                   style: theme.textTheme.titleMedium,
                 ),
               ],

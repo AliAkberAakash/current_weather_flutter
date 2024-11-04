@@ -60,6 +60,7 @@ void main() {
           WeeklyWeatherResponse(
             dateTime: 1730548800,
             weatherDetails: WeatherDetails(
+              temp: 15.0,
               tempMin: 283.81,
               tempMax: 284.24,
               pressure: 1030,

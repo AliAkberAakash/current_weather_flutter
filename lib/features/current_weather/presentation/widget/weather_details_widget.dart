@@ -53,7 +53,7 @@ class WeatherDetailsWidget extends StatelessWidget {
           weatherDetailsUiModel.smallIcon,
         ),
         Text(
-          "${weatherDetailsUiModel.tempMax}°",
+          weatherDetailsUiModel.temp,
           style: theme.textTheme.displayLarge,
         ),
         Column(

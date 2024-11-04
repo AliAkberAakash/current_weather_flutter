@@ -40,6 +40,7 @@ void main() {
         ],
         speed: 5.0,
         unit: MeasurementUnit.metric,
+        temp: 15.0,
       ),
     ];
 

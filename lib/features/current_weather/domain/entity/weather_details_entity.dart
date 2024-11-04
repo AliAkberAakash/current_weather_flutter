@@ -2,6 +2,7 @@ import 'package:current_weather/features/current_weather/util/temperature_unit.d
 
 class WeatherDetailsEntity {
   final int dateTime;
+  final double temp;
   final double tempMin;
   final double tempMax;
   final int pressure;
@@ -13,6 +14,7 @@ class WeatherDetailsEntity {
 
   const WeatherDetailsEntity({
     required this.dateTime,
+    required this.temp,
     required this.tempMin,
     required this.tempMax,
     required this.pressure,

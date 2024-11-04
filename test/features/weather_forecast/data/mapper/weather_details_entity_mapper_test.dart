@@ -13,6 +13,7 @@ void main() {
       const weeklyWeatherResponse = WeeklyWeatherResponse(
         dateTime: 1234567890,
         weatherDetails: WeatherDetails(
+          temp: 15.0,
           tempMin: 15.0,
           tempMax: 25.0,
           pressure: 1012,

@@ -39,6 +39,8 @@ class WeeklyWeatherResponse extends Equatable {
 
 @JsonSerializable(createToJson: false)
 class WeatherDetails extends Equatable {
+  @JsonKey(name: 'temp')
+  final double temp;
   @JsonKey(name: 'temp_min')
   final double tempMin;
   @JsonKey(name: 'temp_max')
@@ -49,6 +51,7 @@ class WeatherDetails extends Equatable {
   final int humidity;
 
   const WeatherDetails({
+    required this.temp,
     required this.tempMin,
     required this.tempMax,
     required this.pressure,

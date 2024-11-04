@@ -41,6 +41,7 @@ void main() {
     const weatherDetailsResponse = WeeklyWeatherResponse(
       dateTime: 1234567890,
       weatherDetails: WeatherDetails(
+        temp: 15.0,
         tempMin: 15.0,
         tempMax: 25.0,
         pressure: 1012,
@@ -73,6 +74,7 @@ void main() {
       ],
       speed: 5.0,
       unit: MeasurementUnit.metric,
+      temp: 15.0,
     );
     const expectedResult = [weatherDetailsEntity];
 
