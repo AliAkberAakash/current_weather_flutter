@@ -1,7 +1,9 @@
 import 'dart:async';
 
-import 'package:current_weather/core/exceptions/base_exception.dart';
+import 'package:current_weather/core/exceptions/network_exceptions.dart';
+import 'package:current_weather/core/exceptions/server_exception.dart';
 import 'package:current_weather/features/weather_forecast/domain/use_case/weather_forecast_use_case.dart';
+import 'package:current_weather/features/weather_forecast/presentation/bloc/error_keys.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/weather_forecast/presentation/bloc/weather_list/weather_list_state.dart';
 import 'package:current_weather/features/weather_forecast/presentation/model/weather_details_ui_model.dart';
@@ -30,12 +32,12 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       );
 
       emit(WeatherListLoadedState(response));
-    } catch (e) {
-      if (e is BaseException) {
-        emit(WeatherListErrorState(exception: e));
-      } else {
-        emit(WeatherListErrorState());
-      }
+    } on Exception catch (e) {
+      emit(
+        WeatherListErrorState(
+          errorKey: _mapExceptionToErrorKey(e),
+        ),
+      );
     }
   }
 
@@ -61,19 +63,39 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     WeatherListChangeTemperatureEvent event,
     Emitter<WeatherListState> emit,
   ) async {
-    late final MeasurementUnit currentUnit;
-    if (event.unit == MeasurementUnit.metric) {
-      currentUnit = MeasurementUnit.imperial;
-    } else {
-      currentUnit = MeasurementUnit.metric;
+    try {
+      late final MeasurementUnit currentUnit;
+      if (event.unit == MeasurementUnit.metric) {
+        currentUnit = MeasurementUnit.imperial;
+      } else {
+        currentUnit = MeasurementUnit.metric;
+      }
+
+      final List<WeatherDetailsUiModel> response = await _loadWeatherList(
+        event.lat,
+        event.lon,
+        currentUnit,
+      );
+
+      emit(WeatherListLoadedState(response));
+    } on Exception catch (e) {
+      emit(
+        WeatherListErrorState(
+          errorKey: _mapExceptionToErrorKey(e),
+        ),
+      );
     }
+  }
 
-    final List<WeatherDetailsUiModel> response = await _loadWeatherList(
-      event.lat,
-      event.lon,
-      currentUnit,
-    );
-
-    emit(WeatherListLoadedState(response));
+  ErrorKey _mapExceptionToErrorKey(Exception e) {
+    if (e is ServerException) {
+      return ErrorKey.serverError;
+    } else if (e is NetworkException) {
+      return ErrorKey.networkError;
+    } else if (e is NetworkTimeoutException) {
+      return ErrorKey.networkTimeOutError;
+    } else {
+      return ErrorKey.commonError;
+    }
   }
 }
