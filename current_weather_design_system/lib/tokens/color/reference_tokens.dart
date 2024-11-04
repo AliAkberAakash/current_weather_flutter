@@ -3,7 +3,7 @@ import 'dart:ui';
 // Reference Color Tokens for Light Theme
 const Color cwRefPrimaryLight = Color(0xFF4A672D);
 const Color cwRefOnPrimaryLight = Color(0xFFFFFFFF);
-const Color cwRefPrimaryContainerLight = Color(0xFFCBEEA5);
+const Color cwRefPrimaryContainerLight = Color(0xFFFF8945);
 const Color cwRefOnPrimaryContainerLight = Color(0xFF0E2000);
 
 const Color cwRefSecondaryLight = Color(0xFF4A672D);
@@ -49,8 +49,8 @@ const Color cwRefScrimLight = Color(0xFF000000);
 // Reference Color Tokens for Dark Theme
 const Color cwRefPrimaryDark = Color(0xFFB0D18B);
 const Color cwRefOnPrimaryDark = Color(0xFF1D3702);
-const Color cwRefPrimaryContainerDark = Color(0xFF334E17);
-const Color cwRefOnPrimaryContainerDark = Color(0xFFCBEEA5);
+const Color cwRefPrimaryContainerDark = Color(0xFFFF8945);
+const Color cwRefOnPrimaryContainerDark = Color(0xFFE2E3D8);
 
 const Color cwRefSecondaryDark = Color(0xFFB0D18B);
 const Color cwRefOnSecondaryDark = Color(0xFF1E3702);

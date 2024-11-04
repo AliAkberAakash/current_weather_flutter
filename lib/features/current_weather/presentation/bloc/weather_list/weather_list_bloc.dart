@@ -32,7 +32,7 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       );
 
       emit(WeatherListLoadedState(response));
-    } on Exception catch (e) {
+    } catch (e) {
       emit(
         WeatherListErrorState(
           errorKey: _mapExceptionToErrorKey(e),
@@ -78,7 +78,7 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       );
 
       emit(WeatherListLoadedState(response));
-    } on Exception catch (e) {
+    } catch (e) {
       emit(
         WeatherListErrorState(
           errorKey: _mapExceptionToErrorKey(e),
@@ -87,7 +87,7 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     }
   }
 
-  ErrorKey _mapExceptionToErrorKey(Exception e) {
+  ErrorKey _mapExceptionToErrorKey(e) {
     if (e is ServerException) {
       return ErrorKey.serverError;
     } else if (e is NetworkException) {

@@ -70,7 +70,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
                       weatherDetailsUiModelList:
                           state.weatherDetailsUiModelList,
                       weatherDetailsCubit: weatherDetailsCubit,
-                      onRefresh: () => _loadWeather,
+                      onRefresh: _loadWeather,
                       onTemperatureUnitChange: _changeTemperatureUnit,
                     );
                   }
