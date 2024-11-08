@@ -4,8 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
 	<key>CFBundleDisplayName</key>
-	<string>Current Weather</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
