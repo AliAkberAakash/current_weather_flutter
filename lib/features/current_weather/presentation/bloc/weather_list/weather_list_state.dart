@@ -2,14 +2,14 @@ import 'package:current_weather/features/current_weather/presentation/bloc/error
 import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class WeatherListState extends Equatable {}
-
-class WeatherListLoadingState extends WeatherListState {
+sealed class WeatherListState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class WeatherListLoadedState extends WeatherListState {
+final class WeatherListLoadingState extends WeatherListState {}
+
+final class WeatherListLoadedState extends WeatherListState {
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
 
   WeatherListLoadedState(this.weatherDetailsUiModelList);
@@ -18,7 +18,7 @@ class WeatherListLoadedState extends WeatherListState {
   List<Object?> get props => [weatherDetailsUiModelList];
 }
 
-class WeatherListErrorState extends WeatherListState {
+final class WeatherListErrorState extends WeatherListState {
   final ErrorKey errorKey;
 
   WeatherListErrorState({
