@@ -10,7 +10,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../util/measurement_unit.dart';
 
 class CurrentWeatherPortraitScreen extends StatefulWidget {
-  final WeatherDetailsCubit weatherDetailsCubit;
   final List<WeatherDetailsUiModel> weatherDetailsUiModelList;
   final void Function() onRefresh;
   final void Function(MeasurementUnit) onTemperatureUnitChange;
@@ -18,7 +17,6 @@ class CurrentWeatherPortraitScreen extends StatefulWidget {
   const CurrentWeatherPortraitScreen({
     super.key,
     required this.weatherDetailsUiModelList,
-    required this.weatherDetailsCubit,
     required this.onRefresh,
     required this.onTemperatureUnitChange,
   });
@@ -55,7 +53,6 @@ class _CurrentWeatherPortraitScreenState
           children: [
             Expanded(
               child: BlocBuilder<WeatherDetailsCubit, WeatherDetailsUiModel?>(
-                bloc: widget.weatherDetailsCubit,
                 builder: (ctx, state) {
                   if (state != null) {
                     return WeatherDetailsWidget(
@@ -80,7 +77,9 @@ class _CurrentWeatherPortraitScreenState
                 itemBuilder: (BuildContext context, int index) {
                   return WeatherDayInfoWidget(
                     uiModel: widget.weatherDetailsUiModelList[index],
-                    onTap: widget.weatherDetailsCubit.updateWeatherDetails,
+                    onTap: context
+                        .read<WeatherDetailsCubit>()
+                        .updateWeatherDetails,
                   );
                 },
               ),
