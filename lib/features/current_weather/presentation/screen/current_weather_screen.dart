@@ -38,56 +38,47 @@ class _CurrentWeatherScreenState extends State<CurrentWeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<WeatherListBloc, WeatherListState>(
-            bloc: weatherListBloc,
-            listener: (context, state) {
-              if (state is WeatherListLoadedState &&
-                  state.weatherDetailsUiModelList.isNotEmpty) {
-                weatherDetailsCubit.updateWeatherDetails(
-                  state.weatherDetailsUiModelList.first,
-                );
-              }
-            },
-          )
-        ],
-        child: BlocBuilder<WeatherListBloc, WeatherListState>(
-          bloc: weatherListBloc,
-          builder: (ctx, state) {
-            if (state is WeatherListLoadedState) {
-              return OrientationBuilder(
-                builder: (ctx, orientation) {
-                  if (orientation == Orientation.portrait) {
-                    return CurrentWeatherPortraitScreen(
-                      weatherDetailsUiModelList:
-                          state.weatherDetailsUiModelList,
-                      weatherDetailsCubit: weatherDetailsCubit,
-                      onRefresh: _loadWeather,
-                      onTemperatureUnitChange: _changeTemperatureUnit,
-                    );
-                  } else {
-                    return CurrentWeatherLandscapeScreen(
-                      weatherDetailsUiModelList:
-                          state.weatherDetailsUiModelList,
-                      weatherDetailsCubit: weatherDetailsCubit,
-                      onRefresh: _loadWeather,
-                      onTemperatureUnitChange: _changeTemperatureUnit,
-                    );
-                  }
-                },
-              );
-            } else if (state is WeatherListLoadingState) {
-              return CurrentWeatherLoadingScreen();
-            } else {
-              return Center(
-                child: CurrentWeatherErrorScreen(
-                  onTap: _loadWeather,
-                ),
-              );
-            }
-          },
-        ),
+      body: BlocConsumer<WeatherListBloc, WeatherListState>(
+        listener: (ctx, state) {
+          if (state is WeatherListLoadedState &&
+              state.weatherDetailsUiModelList.isNotEmpty) {
+            weatherDetailsCubit.updateWeatherDetails(
+              state.weatherDetailsUiModelList.first,
+            );
+          }
+        },
+        bloc: weatherListBloc,
+        builder: (ctx, state) {
+          if (state is WeatherListLoadedState) {
+            return OrientationBuilder(
+              builder: (ctx, orientation) {
+                if (orientation == Orientation.portrait) {
+                  return CurrentWeatherPortraitScreen(
+                    weatherDetailsUiModelList: state.weatherDetailsUiModelList,
+                    weatherDetailsCubit: weatherDetailsCubit,
+                    onRefresh: _loadWeather,
+                    onTemperatureUnitChange: _changeTemperatureUnit,
+                  );
+                } else {
+                  return CurrentWeatherLandscapeScreen(
+                    weatherDetailsUiModelList: state.weatherDetailsUiModelList,
+                    weatherDetailsCubit: weatherDetailsCubit,
+                    onRefresh: _loadWeather,
+                    onTemperatureUnitChange: _changeTemperatureUnit,
+                  );
+                }
+              },
+            );
+          } else if (state is WeatherListLoadingState) {
+            return CurrentWeatherLoadingScreen();
+          } else {
+            return Center(
+              child: CurrentWeatherErrorScreen(
+                onTap: _loadWeather,
+              ),
+            );
+          }
+        },
       ),
     );
   }
