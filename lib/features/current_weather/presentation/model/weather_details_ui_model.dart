@@ -113,6 +113,7 @@ class WeatherDetailsUiModel extends Equatable {
   List<Object?> get props => [
         dayNameFull,
         dayNameShort,
+        temp,
         tempMin,
         tempMax,
         pressure,
@@ -121,6 +122,9 @@ class WeatherDetailsUiModel extends Equatable {
         weatherCondition,
         description,
         smallIcon,
+        bigIcon,
         windSpeed,
+        measurementUnit,
+        temperatureUnit,
       ];
 }
