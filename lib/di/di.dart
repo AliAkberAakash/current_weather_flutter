@@ -1,6 +1,7 @@
 import 'package:current_weather/core/network/dio_configuration.dart';
 import 'package:current_weather/core/network/dio_network_client.dart';
 import 'package:current_weather/core/network/network_client.dart';
+import 'package:current_weather/features/common/data/mapper/exception_to_error_mapper.dart';
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
 import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
 import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source_impl.dart';
@@ -52,8 +53,12 @@ void setup() {
   getIt.registerLazySingleton<WeatherDetailsEntityMapper>(
       () => WeatherDetailsEntityMapperImpl());
 
+  getIt.registerLazySingleton<ExceptionToErrorMapper>(
+      () => ExceptionToErrorMapperImpl());
+
   getIt.registerLazySingleton<CurrentWeatherRepository>(
     () => CurrentWeatherRepositoryImpl(
+      getIt.get(),
       getIt.get(),
       getIt.get(),
       getIt.get(),

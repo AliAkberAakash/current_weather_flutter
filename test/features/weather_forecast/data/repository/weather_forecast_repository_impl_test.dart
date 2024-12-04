@@ -1,5 +1,6 @@
 import 'package:current_weather/core/exceptions/network_exceptions.dart';
 import 'package:current_weather/core/exceptions/server_exception.dart';
+import 'package:current_weather/features/common/data/mapper/exception_to_error_mapper.dart';
 import 'package:current_weather/features/current_weather/data/mapper/weather_details_entity_mapper.dart';
 import 'package:current_weather/features/current_weather/data/network/dto/current_weather_response.dart';
 import 'package:current_weather/features/current_weather/data/network/current_weather_network_data_source.dart';
@@ -18,19 +19,25 @@ class _MockWeatherNetworkDataSource extends Mock
 class _MockWeatherDetailsEntityMapper extends Mock
     implements WeatherDetailsEntityMapper {}
 
+class _MockExceptionToErrorMapper extends Mock
+    implements ExceptionToErrorMapper {}
+
 void main() {
   late CurrentWeatherRepositoryImpl repository;
   late _MockWeatherNetworkDataSource mockNetworkDataSource;
   late _MockWeatherDetailsEntityMapper mockMapper;
+  late _MockExceptionToErrorMapper errorMapper;
   late Logger mockLogger;
 
   setUp(() {
     mockNetworkDataSource = _MockWeatherNetworkDataSource();
     mockMapper = _MockWeatherDetailsEntityMapper();
     mockLogger = MockLogger();
+    errorMapper = _MockExceptionToErrorMapper();
     repository = CurrentWeatherRepositoryImpl(
       mockNetworkDataSource,
       mockMapper,
+      errorMapper,
       mockLogger,
     );
   });
