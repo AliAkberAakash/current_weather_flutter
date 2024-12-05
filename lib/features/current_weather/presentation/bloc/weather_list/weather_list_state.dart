@@ -1,4 +1,4 @@
-import 'package:current_weather/features/current_weather/presentation/bloc/error_keys.dart';
+import 'package:current_weather/features/common/domain/error/error.dart';
 import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
 import 'package:equatable/equatable.dart';
 
@@ -19,12 +19,12 @@ final class WeatherListLoadedState extends WeatherListState {
 }
 
 final class WeatherListErrorState extends WeatherListState {
-  final ErrorKey errorKey;
+  final BaseError error;
 
   WeatherListErrorState({
-    required this.errorKey,
+    required this.error,
   });
 
   @override
-  List<Object?> get props => [errorKey];
+  List<Object?> get props => [error];
 }

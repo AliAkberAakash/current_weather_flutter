@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:current_weather/core/exceptions/network_exceptions.dart';
-import 'package:current_weather/core/exceptions/server_exception.dart';
+import 'package:current_weather/features/common/domain/error/error.dart';
 import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case.dart';
-import 'package:current_weather/features/current_weather/presentation/bloc/error_keys.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_state.dart';
 import 'package:current_weather/features/current_weather/presentation/model/weather_details_ui_model.dart';
@@ -32,10 +30,16 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       );
 
       emit(WeatherListLoadedState(response));
+    } on BaseError catch (e) {
+      emit(
+        WeatherListErrorState(
+          error: e,
+        ),
+      );
     } catch (e) {
       emit(
         WeatherListErrorState(
-          errorKey: _mapExceptionToErrorKey(e),
+          error: CommonError(),
         ),
       );
     }
@@ -78,24 +82,18 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       );
 
       emit(WeatherListLoadedState(response));
+    } on BaseError catch (e) {
+      emit(
+        WeatherListErrorState(
+          error: e,
+        ),
+      );
     } catch (e) {
       emit(
         WeatherListErrorState(
-          errorKey: _mapExceptionToErrorKey(e),
+          error: CommonError(),
         ),
       );
-    }
-  }
-
-  ErrorKey _mapExceptionToErrorKey(e) {
-    if (e is ServerException) {
-      return ErrorKey.serverError;
-    } else if (e is NetworkException) {
-      return ErrorKey.networkError;
-    } else if (e is NetworkTimeoutException) {
-      return ErrorKey.networkTimeOutError;
-    } else {
-      return ErrorKey.commonError;
     }
   }
 }

@@ -1,9 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:current_weather/core/exceptions/network_exceptions.dart';
-import 'package:current_weather/core/exceptions/server_exception.dart';
+import 'package:current_weather/features/common/domain/error/error.dart';
 import 'package:current_weather/features/current_weather/domain/entity/weather_details_entity.dart';
 import 'package:current_weather/features/current_weather/domain/use_case/current_weather_use_case.dart';
-import 'package:current_weather/features/current_weather/presentation/bloc/error_keys.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_bloc.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_event.dart';
 import 'package:current_weather/features/current_weather/presentation/bloc/weather_list/weather_list_state.dart';
@@ -41,13 +39,13 @@ void main() {
                 -20.3,
                 MeasurementUnit.metric,
               ),
-            ).thenThrow(ServerException());
+            ).thenThrow(ServerError());
           },
           act: (bloc) => bloc.add(WeatherListLoadEvent()),
           expect: () => <WeatherListState>[
             WeatherListLoadingState(),
             WeatherListErrorState(
-              errorKey: ErrorKey.serverError,
+              error: ServerError(),
             ),
           ],
           verify: (_) {
@@ -71,13 +69,13 @@ void main() {
                 -20.3,
                 MeasurementUnit.metric,
               ),
-            ).thenThrow(NetworkException());
+            ).thenThrow(NetworkError());
           },
           act: (bloc) => bloc.add(WeatherListLoadEvent()),
           expect: () => <WeatherListState>[
             WeatherListLoadingState(),
             WeatherListErrorState(
-              errorKey: ErrorKey.networkError,
+              error: NetworkError(),
             ),
           ],
           verify: (_) {
@@ -101,13 +99,13 @@ void main() {
                 -20.3,
                 MeasurementUnit.metric,
               ),
-            ).thenThrow(NetworkTimeoutException());
+            ).thenThrow(NetworkTimeoutError());
           },
           act: (bloc) => bloc.add(WeatherListLoadEvent()),
           expect: () => <WeatherListState>[
             WeatherListLoadingState(),
             WeatherListErrorState(
-              errorKey: ErrorKey.networkTimeOutError,
+              error: NetworkTimeoutError(),
             ),
           ],
           verify: (_) {
@@ -131,13 +129,13 @@ void main() {
                 -20.3,
                 MeasurementUnit.metric,
               ),
-            ).thenThrow(Exception());
+            ).thenThrow(CommonError());
           },
           act: (bloc) => bloc.add(WeatherListLoadEvent()),
           expect: () => <WeatherListState>[
             WeatherListLoadingState(),
             WeatherListErrorState(
-              errorKey: ErrorKey.commonError,
+              error: CommonError(),
             ),
           ],
           verify: (_) {
