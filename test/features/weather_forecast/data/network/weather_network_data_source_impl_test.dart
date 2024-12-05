@@ -73,9 +73,9 @@ void main() {
         ];
 
         final result = await weatherNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         );
 
         expect(result, expectedResult);
@@ -101,9 +101,9 @@ void main() {
 
         expect(
           weatherNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           ),
           throwsA(isA<NetworkException>()),
         );
@@ -130,9 +130,9 @@ void main() {
 
         expect(
           weatherNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           ),
           throwsA(isA<NetworkTimeoutException>()),
         );
@@ -159,9 +159,9 @@ void main() {
 
         expect(
           weatherNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           ),
           throwsA(isA<ServerException>()),
         );
@@ -188,9 +188,9 @@ void main() {
 
         expect(
           weatherNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           ),
           throwsA(isA<FormatException>()),
         );

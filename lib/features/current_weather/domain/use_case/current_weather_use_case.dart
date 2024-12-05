@@ -2,9 +2,9 @@ import 'package:current_weather/features/current_weather/domain/entity/weather_d
 import 'package:current_weather/features/current_weather/util/measurement_unit.dart';
 
 abstract class CurrentWeatherUseCase {
-  Future<List<WeatherDetailsEntity>> getWeatherDetails(
-    final double lat,
-    final double lon,
-    final MeasurementUnit unit,
-  );
+  Future<List<WeatherDetailsEntity>> getWeatherDetails({
+    required final double lat,
+    required final double lon,
+    required final MeasurementUnit unit,
+  });
 }

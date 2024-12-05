@@ -21,16 +21,16 @@ class CurrentWeatherRepositoryImpl implements CurrentWeatherRepository {
   );
 
   @override
-  Future<List<WeatherDetailsEntity>> getWeatherDetails(
-    final double lat,
-    final double lon,
-    final MeasurementUnit unit,
-  ) async {
+  Future<List<WeatherDetailsEntity>> getWeatherDetails({
+    required final double lat,
+    required final double lon,
+    required final MeasurementUnit unit,
+  }) async {
     try {
       final response = await _weatherNetworkDataSource.getWeatherResponse(
-        lat,
-        lon,
-        unit.name,
+        lat: lat,
+        lon: lon,
+        unit: unit.name,
       );
 
       return response

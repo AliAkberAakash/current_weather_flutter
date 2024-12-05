@@ -35,9 +35,9 @@ void main() {
           setUp: () {
             when(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).thenThrow(ServerError());
           },
@@ -51,9 +51,9 @@ void main() {
           verify: (_) {
             verify(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).called(1);
           },
@@ -65,9 +65,9 @@ void main() {
           setUp: () {
             when(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).thenThrow(NetworkError());
           },
@@ -81,9 +81,9 @@ void main() {
           verify: (_) {
             verify(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).called(1);
           },
@@ -95,9 +95,9 @@ void main() {
           setUp: () {
             when(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).thenThrow(NetworkTimeoutError());
           },
@@ -111,9 +111,9 @@ void main() {
           verify: (_) {
             verify(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).called(1);
           },
@@ -125,9 +125,9 @@ void main() {
           setUp: () {
             when(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).thenThrow(CommonError());
           },
@@ -141,9 +141,9 @@ void main() {
           verify: (_) {
             verify(
               () => currentWeatherUseCase.getWeatherDetails(
-                10.2,
-                -20.3,
-                MeasurementUnit.metric,
+                lat: 10.2,
+                lon: -20.3,
+                unit: MeasurementUnit.metric,
               ),
             ).called(1);
           },
@@ -191,9 +191,9 @@ void main() {
         setUp: () {
           when(
             () => currentWeatherUseCase.getWeatherDetails(
-              10.2,
-              -20.3,
-              MeasurementUnit.metric,
+              lat: 10.2,
+              lon: -20.3,
+              unit: MeasurementUnit.metric,
             ),
           ).thenAnswer(
             (_) => Future.value([
@@ -209,9 +209,9 @@ void main() {
         verify: (_) {
           verify(
             () => currentWeatherUseCase.getWeatherDetails(
-              10.2,
-              -20.3,
-              MeasurementUnit.metric,
+              lat: 10.2,
+              lon: -20.3,
+              unit: MeasurementUnit.metric,
             ),
           ).called(1);
         },

@@ -24,9 +24,9 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     emit(WeatherListLoadingState());
     try {
       final List<WeatherDetailsUiModel> response = await _loadWeatherList(
-        event.lat,
-        event.lon,
-        event.unit,
+        lat: event.lat,
+        lon: event.lon,
+        unit: event.unit,
       );
 
       emit(WeatherListLoadedState(response));
@@ -45,15 +45,15 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     }
   }
 
-  Future<List<WeatherDetailsUiModel>> _loadWeatherList(
-    final double lat,
-    final double lon,
-    final MeasurementUnit unit,
-  ) async {
+  Future<List<WeatherDetailsUiModel>> _loadWeatherList({
+    required final double lat,
+    required final double lon,
+    required final MeasurementUnit unit,
+  }) async {
     final response = await useCase.getWeatherDetails(
-      lat,
-      lon,
-      unit,
+      lat: lat,
+      lon: lon,
+      unit: unit,
     );
 
     return response
@@ -76,9 +76,9 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       }
 
       final List<WeatherDetailsUiModel> response = await _loadWeatherList(
-        event.lat,
-        event.lon,
-        currentUnit,
+        lat: event.lat,
+        lon: event.lon,
+        unit: currentUnit,
       );
 
       emit(WeatherListLoadedState(response));

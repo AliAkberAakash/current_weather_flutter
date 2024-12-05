@@ -88,9 +88,9 @@ void main() {
         () async {
       when(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).thenAnswer((_) => Future.value(mockResponse));
       when(
@@ -101,17 +101,17 @@ void main() {
       ).thenAnswer((_) => weatherDetailsEntity);
 
       final result = await repository.getWeatherDetails(
-        -10,
-        -20,
-        MeasurementUnit.metric,
+        lat: -10,
+        lon: -20,
+        unit: MeasurementUnit.metric,
       );
 
       expect(result, expectedResult);
       verify(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).called(1);
       verify(
@@ -129,24 +129,24 @@ void main() {
         "getWeatherDetails throws NetworkException when network data source throws NetworkException",
         () async {
       when(() => mockNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           )).thenThrow(const NetworkException());
 
       expect(
         repository.getWeatherDetails(
-          -10,
-          -20,
-          MeasurementUnit.metric,
+          lat: -10,
+          lon: -20,
+          unit: MeasurementUnit.metric,
         ),
         throwsA(isA<NetworkException>()),
       );
       verify(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).called(1);
       verifyNever(
@@ -164,24 +164,24 @@ void main() {
         "getWeatherDetails throws NetworkTimeoutException when network data source throws NetworkTimeoutException",
         () async {
       when(() => mockNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           )).thenThrow(const NetworkTimeoutException());
 
       expect(
         repository.getWeatherDetails(
-          -10,
-          -20,
-          MeasurementUnit.metric,
+          lat: -10,
+          lon: -20,
+          unit: MeasurementUnit.metric,
         ),
         throwsA(isA<NetworkTimeoutException>()),
       );
       verify(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).called(1);
       verifyNever(
@@ -199,24 +199,24 @@ void main() {
         "getWeatherDetails throws ServerException when network data source throws ServerException",
         () async {
       when(() => mockNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           )).thenThrow(const ServerException());
 
       expect(
         repository.getWeatherDetails(
-          -10,
-          -20,
-          MeasurementUnit.metric,
+          lat: -10,
+          lon: -20,
+          unit: MeasurementUnit.metric,
         ),
         throwsA(isA<ServerException>()),
       );
       verify(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).called(1);
       verifyNever(
@@ -234,24 +234,24 @@ void main() {
         "getWeatherDetails rethrows any other exception when network data source throws exception",
         () async {
       when(() => mockNetworkDataSource.getWeatherResponse(
-            50.221291,
-            9.968617,
-            "metric",
+            lat: 50.221291,
+            lon: 9.968617,
+            unit: "metric",
           )).thenThrow(const FormatException());
 
       expect(
         repository.getWeatherDetails(
-          -10,
-          -20,
-          MeasurementUnit.metric,
+          lat: -10,
+          lon: -20,
+          unit: MeasurementUnit.metric,
         ),
         throwsA(isA<FormatException>()),
       );
       verify(
         () => mockNetworkDataSource.getWeatherResponse(
-          50.221291,
-          9.968617,
-          "metric",
+          lat: 50.221291,
+          lon: 9.968617,
+          unit: "metric",
         ),
       ).called(1);
       verifyNever(

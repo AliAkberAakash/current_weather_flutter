@@ -11,12 +11,16 @@ class CurrentWeatherUseCaseImpl implements CurrentWeatherUseCase {
   );
 
   @override
-  Future<List<WeatherDetailsEntity>> getWeatherDetails(
-    final double lat,
-    final double lon,
-    final MeasurementUnit unit,
-  ) async {
-    final response = await repository.getWeatherDetails(lat, lon, unit);
+  Future<List<WeatherDetailsEntity>> getWeatherDetails({
+    required final double lat,
+    required final double lon,
+    required final MeasurementUnit unit,
+  }) async {
+    final response = await repository.getWeatherDetails(
+      lat: lat,
+      lon: lon,
+      unit: unit,
+    );
     return _filterFirstWeatherDetailsPerDay(response);
   }
 

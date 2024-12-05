@@ -19,93 +19,174 @@ void main() {
     useCase = CurrentWeatherUseCaseImpl(mockRepository);
   });
 
-  group('WeatherForecastUseCaseImpl', () {
-    const double lat = 52.52;
-    const double lon = 13.405;
-    const MeasurementUnit unit = MeasurementUnit.metric;
-    const weatherDetailsEntityList = [
-      WeatherDetailsEntity(
-        dateTime: 1234567890,
-        tempMin: 15.0,
-        tempMax: 25.0,
-        pressure: 1012,
-        humidity: 85,
-        partOfDay: 'd',
-        weather: [
-          WeatherEntity(
-            name: 'Clear',
-            description: 'clear sky',
-            icon: '01d',
-          )
-        ],
-        speed: 5.0,
-        unit: MeasurementUnit.metric,
-        temp: 15.0,
-      ),
-    ];
+  group(
+    'WeatherForecastUseCaseImpl',
+    () {
+      const double lat = 52.52;
+      const double lon = 13.405;
+      const MeasurementUnit unit = MeasurementUnit.metric;
+      const weatherDetailsEntityList = [
+        WeatherDetailsEntity(
+          dateTime: 1234567890,
+          tempMin: 15.0,
+          tempMax: 25.0,
+          pressure: 1012,
+          humidity: 85,
+          partOfDay: 'd',
+          weather: [
+            WeatherEntity(
+              name: 'Clear',
+              description: 'clear sky',
+              icon: '01d',
+            )
+          ],
+          speed: 5.0,
+          unit: MeasurementUnit.metric,
+          temp: 15.0,
+        ),
+      ];
 
-    test(
+      test(
         'getWeatherDetails returns list of WeatherDetailsEntity when repository call succeeds',
         () async {
-      when(() => mockRepository.getWeatherDetails(lat, lon, unit))
-          .thenAnswer((_) async => weatherDetailsEntityList);
+          when(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).thenAnswer((_) async => weatherDetailsEntityList);
 
-      final result = await useCase.getWeatherDetails(lat, lon, unit);
+          final result = await useCase.getWeatherDetails(
+            lat: lat,
+            lon: lon,
+            unit: unit,
+          );
 
-      expect(result, equals(weatherDetailsEntityList));
-      verify(() => mockRepository.getWeatherDetails(lat, lon, unit)).called(1);
-    });
+          expect(result, equals(weatherDetailsEntityList));
+          verify(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).called(1);
+        },
+      );
 
-    test(
+      test(
         'getWeatherDetails throws NetworkException when repository call throws NetworkException',
         () async {
-      when(() => mockRepository.getWeatherDetails(lat, lon, unit))
-          .thenThrow(const NetworkException());
+          when(() => mockRepository.getWeatherDetails(
+                lat: lat,
+                lon: lon,
+                unit: unit,
+              )).thenThrow(const NetworkException());
 
-      expect(
-        () => useCase.getWeatherDetails(lat, lon, unit),
-        throwsA(isA<NetworkException>()),
+          expect(
+            () => useCase.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+            throwsA(isA<NetworkException>()),
+          );
+          verify(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).called(1);
+        },
       );
-      verify(() => mockRepository.getWeatherDetails(lat, lon, unit)).called(1);
-    });
 
-    test(
+      test(
         'getWeatherDetails throws NetworkTimeoutException when repository call throws NetworkTimeoutException',
         () async {
-      when(() => mockRepository.getWeatherDetails(lat, lon, unit))
-          .thenThrow(const NetworkTimeoutException());
+          when(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).thenThrow(const NetworkTimeoutException());
 
-      expect(
-        () => useCase.getWeatherDetails(lat, lon, unit),
-        throwsA(isA<NetworkTimeoutException>()),
+          expect(
+            () => useCase.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+            throwsA(isA<NetworkTimeoutException>()),
+          );
+          verify(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).called(1);
+        },
       );
-      verify(() => mockRepository.getWeatherDetails(lat, lon, unit)).called(1);
-    });
 
-    test(
+      test(
         'getWeatherDetails throws ServerException when repository call throws ServerException',
         () async {
-      when(() => mockRepository.getWeatherDetails(lat, lon, unit))
-          .thenThrow(const ServerException());
+          when(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).thenThrow(const ServerException());
 
-      expect(
-        () => useCase.getWeatherDetails(lat, lon, unit),
-        throwsA(isA<ServerException>()),
+          expect(
+            () => useCase.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+            throwsA(isA<ServerException>()),
+          );
+          verify(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).called(1);
+        },
       );
-      verify(() => mockRepository.getWeatherDetails(lat, lon, unit)).called(1);
-    });
 
-    test(
+      test(
         'getWeatherDetails throws FormatException when repository call throws FormatException',
         () async {
-      when(() => mockRepository.getWeatherDetails(lat, lon, unit))
-          .thenThrow(const FormatException());
+          when(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).thenThrow(const FormatException());
 
-      expect(
-        () => useCase.getWeatherDetails(lat, lon, unit),
-        throwsA(isA<FormatException>()),
+          expect(
+            () => useCase.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+            throwsA(isA<FormatException>()),
+          );
+          verify(
+            () => mockRepository.getWeatherDetails(
+              lat: lat,
+              lon: lon,
+              unit: unit,
+            ),
+          ).called(1);
+        },
       );
-      verify(() => mockRepository.getWeatherDetails(lat, lon, unit)).called(1);
-    });
-  });
+    },
+  );
 }
