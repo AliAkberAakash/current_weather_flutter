@@ -18,8 +18,8 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
   }
 
   FutureOr<void> _onWeatherListLoadHandler(
-    WeatherListLoadEvent event,
-    Emitter<WeatherListState> emit,
+    final WeatherListLoadEvent event,
+    final Emitter<WeatherListState> emit,
   ) async {
     emit(WeatherListLoadingState());
     try {
@@ -46,9 +46,9 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
   }
 
   Future<List<WeatherDetailsUiModel>> _loadWeatherList(
-    double lat,
-    double lon,
-    MeasurementUnit unit,
+    final double lat,
+    final double lon,
+    final MeasurementUnit unit,
   ) async {
     final response = await useCase.getWeatherDetails(
       lat,
@@ -64,8 +64,8 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
   }
 
   FutureOr<void> _onWeatherListChangeTemperatureHandler(
-    WeatherListChangeTemperatureEvent event,
-    Emitter<WeatherListState> emit,
+    final WeatherListChangeTemperatureEvent event,
+    final Emitter<WeatherListState> emit,
   ) async {
     try {
       late final MeasurementUnit currentUnit;

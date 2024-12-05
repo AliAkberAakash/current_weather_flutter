@@ -4,16 +4,16 @@ import 'package:current_weather/features/current_weather/util/measurement_unit.d
 
 abstract class WeatherDetailsEntityMapper {
   WeatherDetailsEntity mapFromWeeklyWeatherResponse(
-    CurrentWeatherResponse response,
-    MeasurementUnit unit,
+    final CurrentWeatherResponse response,
+    final MeasurementUnit unit,
   );
 }
 
 class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
   @override
   WeatherDetailsEntity mapFromWeeklyWeatherResponse(
-    CurrentWeatherResponse response,
-    MeasurementUnit unit,
+    final CurrentWeatherResponse response,
+    final MeasurementUnit unit,
   ) {
     return WeatherDetailsEntity(
       dateTime: response.dateTime,
@@ -32,7 +32,7 @@ class WeatherDetailsEntityMapperImpl extends WeatherDetailsEntityMapper {
   }
 
   WeatherEntity _mapFromWeather(
-    Weather response,
+    final Weather response,
   ) {
     return WeatherEntity(
       name: response.name,

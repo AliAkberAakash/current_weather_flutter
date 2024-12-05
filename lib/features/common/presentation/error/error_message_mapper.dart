@@ -1,12 +1,12 @@
 import 'package:current_weather/features/common/domain/error/error.dart';
 
 abstract class ErrorMessageMapper {
-  String mapErrorToMessage(BaseError error);
+  String mapErrorToMessage(final BaseError error);
 }
 
 class ErrorMessageMapperImpl extends ErrorMessageMapper {
   @override
-  String mapErrorToMessage(BaseError error) {
+  String mapErrorToMessage(final BaseError error) {
     switch (error.runtimeType) {
       case NetworkError _:
         return "Failed to load data";

@@ -2,8 +2,8 @@ import 'package:current_weather/features/current_weather/data/network/dto/curren
 
 abstract class CurrentWeatherNetworkDataSource {
   Future<List<CurrentWeatherResponse>> getWeatherResponse(
-    double lat,
-    double lon,
-    String unit,
+    final double lat,
+    final double lon,
+    final String unit,
   );
 }

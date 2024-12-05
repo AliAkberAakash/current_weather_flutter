@@ -16,9 +16,9 @@ class CurrentNetworkDataSourceImpl implements CurrentWeatherNetworkDataSource {
 
   @override
   Future<List<CurrentWeatherResponse>> getWeatherResponse(
-    double lat,
-    double lon,
-    String unit,
+    final double lat,
+    final double lon,
+    final String unit,
   ) async {
     try {
       final networkRequest = NetworkRequest(

@@ -20,7 +20,7 @@ class DioNetworkClient implements NetworkClient {
   }
 
   @override
-  Future<NetworkResponse> get(NetworkRequest request) async {
+  Future<NetworkResponse> get(final NetworkRequest request) async {
     try {
       final response = await _dio.get(
         request.url,
@@ -37,11 +37,11 @@ class DioNetworkClient implements NetworkClient {
     }
   }
 
-  Options _createDioOptions(NetworkRequest request) => Options(
+  Options _createDioOptions(final NetworkRequest request) => Options(
         headers: request.headers ?? {},
       );
 
-  NetworkResponse _handleResponse(Response<dynamic> response) {
+  NetworkResponse _handleResponse(final Response<dynamic> response) {
     if (_isInvalidStatusCode(response.statusCode)) {
       throw ServerException(
         statusCode: response.statusCode,
@@ -55,11 +55,11 @@ class DioNetworkClient implements NetworkClient {
     );
   }
 
-  bool _isInvalidStatusCode(int? statusCode) {
+  bool _isInvalidStatusCode(final int? statusCode) {
     return statusCode == null || statusCode < 200 || statusCode >= 300;
   }
 
-  BaseException _handleDioExceptions(DioException error) {
+  BaseException _handleDioExceptions(final DioException error) {
     if (error.response != null) {
       throw ServerException(
         statusCode: error.response?.statusCode,

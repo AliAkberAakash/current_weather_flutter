@@ -3,8 +3,8 @@ import 'package:current_weather/features/current_weather/util/measurement_unit.d
 
 abstract class CurrentWeatherUseCase {
   Future<List<WeatherDetailsEntity>> getWeatherDetails(
-    double lat,
-    double lon,
-    MeasurementUnit unit,
+    final double lat,
+    final double lon,
+    final MeasurementUnit unit,
   );
 }

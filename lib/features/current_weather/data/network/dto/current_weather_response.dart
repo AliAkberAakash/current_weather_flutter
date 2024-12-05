@@ -24,7 +24,7 @@ class CurrentWeatherResponse extends Equatable {
     required this.sys,
   });
 
-  factory CurrentWeatherResponse.fromJson(Map<String, dynamic> json) =>
+  factory CurrentWeatherResponse.fromJson(final Map<String, dynamic> json) =>
       _$CurrentWeatherResponseFromJson(json);
 
   @override
@@ -58,7 +58,7 @@ class WeatherDetails extends Equatable {
     required this.humidity,
   });
 
-  factory WeatherDetails.fromJson(Map<String, dynamic> json) =>
+  factory WeatherDetails.fromJson(final Map<String, dynamic> json) =>
       _$WeatherDetailsFromJson(json);
 
   @override
@@ -82,7 +82,7 @@ class Sys extends Equatable {
   @override
   List<Object?> get props => [partOfDay];
 
-  factory Sys.fromJson(Map<String, dynamic> json) => _$SysFromJson(json);
+  factory Sys.fromJson(final Map<String, dynamic> json) => _$SysFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -107,7 +107,7 @@ class Weather extends Equatable {
         icon,
       ];
 
-  factory Weather.fromJson(Map<String, dynamic> json) =>
+  factory Weather.fromJson(final Map<String, dynamic> json) =>
       _$WeatherFromJson(json);
 }
 
@@ -123,5 +123,6 @@ class Wind extends Equatable {
   @override
   List<Object?> get props => [speed];
 
-  factory Wind.fromJson(Map<String, dynamic> json) => _$WindFromJson(json);
+  factory Wind.fromJson(final Map<String, dynamic> json) =>
+      _$WindFromJson(json);
 }

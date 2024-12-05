@@ -52,7 +52,7 @@ class WeatherDetailsUiModel extends Equatable {
   });
 
   factory WeatherDetailsUiModel.fromWeatherDetailsEntity(
-    WeatherDetailsEntity entity,
+    final WeatherDetailsEntity entity,
   ) {
     return WeatherDetailsUiModel(
       dayNameFull: _getDayNameFromTimeStamp(

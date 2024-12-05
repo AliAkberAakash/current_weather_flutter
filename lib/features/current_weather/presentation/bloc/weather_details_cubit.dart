@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WeatherDetailsCubit extends Cubit<WeatherDetailsUiModel?> {
   WeatherDetailsCubit() : super(null);
 
-  void updateWeatherDetails(WeatherDetailsUiModel weatherDetailsUiModel) {
+  void updateWeatherDetails(final WeatherDetailsUiModel weatherDetailsUiModel) {
     emit(weatherDetailsUiModel);
   }
 }
